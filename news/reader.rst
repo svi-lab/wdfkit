@@ -1,31 +1,14 @@
-**Added:**
-
-* Expose all parsed WDF block data as typed properties on ``WDFReader``: ``orgn``,
-  ``xlst``, ``ylst``, ``wmap``, ``comment``, ``acquisition``, ``instrument_status``,
-  ``calibration``, ``zeldac``, ``bkxl``, ``whtl_jpeg_bytes``, ``initial_coordinates``,
-  ``motor_positions``, ``acquisition_time``, ``file_uuid``.
-* Add ``WDFFormatError`` raised on structural file integrity failures.
-* Add per-block test suite (87 new tests).
-
 **Changed:**
 
-* Reorganise internal helpers into ``wdf/_helpers/`` subpackage.
-* Rename block parsers to match WDF block IDs (``data.py``, ``orgn.py``).
-* Upgrade PSET parser to return structured ``PSet`` object with ``get_by_label()``,
-  ``get_path()``, and ``walk()`` methods.
-
-**Deprecated:**
-
-* <news item>
-
-**Removed:**
-
-* <news item>
+* Cleaned ``data.attrs``: removed internal parser fields, renamed ``Count`` → ``Nspectra``, ``ScanShape`` → ``Shape``, ``NbSteps`` → ``NSteps``; replaced raw ``XlistDataUnits`` with ``SpectralUnits`` (X-axis units).
+* Formatted ``StartTime`` / ``EndTime`` attrs as ``YYYY-MM-DD HH:MM:SS`` strings (no timezone, no microseconds).
+* Applied same time formatting to catalog ``start_time`` / ``end_time`` columns.
 
 **Fixed:**
 
-* <news item>
+* Removed duplicate ``XlistLength`` key (identical to ``PointsPerSpectrum``) written by the WDF1 block parser.
 
-**Security:**
+**Added:**
 
-* <news item>
+* Added ``Comment`` to ``data.attrs``.
+* Added shared ``format_datetime()`` helper in ``wdfkit._shared.time_utils``.

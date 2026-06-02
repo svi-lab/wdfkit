@@ -35,7 +35,7 @@ def test_harmonic_check_skipped_wrong_laser_or_missing(laser):
         attrs={"treatments": {}},
     )
     if laser is not None:
-        da.attrs["LaserWaveLength"] = laser
+        da.attrs["laser_wavelength_nm"] = laser
     out = CosmicRayRemover().harmonic_check(da)
     assert out is da
     np.testing.assert_array_equal(out.values, da.values)
@@ -52,7 +52,7 @@ def test_harmonic_check_notches_532_nm_axis(capsys):
         dims=("i", "nm"),
         coords={"i": [0], "nm": nm},
         attrs={
-            "LaserWaveLength": 355.0,
+            "laser_wavelength_nm": 355.0,
             "Filename": "synthetic.dat",
             "treatments": {},
         },
@@ -80,7 +80,7 @@ def test_harmonic_check_wavenumber_axis(capsys):
         dims=("t", "wavenumber"),
         coords={"t": [0], "wavenumber": wn},
         attrs={
-            "LaserWaveLength": 355.0,
+            "laser_wavelength_nm": 355.0,
             "Filename": "unknown file",
             "treatments": {},
         },
@@ -99,7 +99,7 @@ def test_remove_runs_harmonic_then_cosmic_ray():
         spec[np.newaxis, :],
         dims=("Time", "nm"),
         coords={"Time": [0.0], "nm": np.linspace(400, 600, n)},
-        attrs={"treatments": {}, "LaserWaveLength": 400.0},
+        attrs={"treatments": {}, "laser_wavelength_nm": 400.0},
     )
     out = CosmicRayRemover(spike_threshold=3.0, spike_width=5).remove(da)
     assert out.values[0, 50] < da.values[0, 50] / 10

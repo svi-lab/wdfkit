@@ -139,10 +139,10 @@ class CosmicRayRemover:
     # ------------------------------------------------------------------
 
     def harmonic_check(self, spectrum: xr.DataArray) -> xr.DataArray:
-        """Notch broad harmonics when ``LaserWaveLength`` is ~355 nm
+        """Notch broad harmonics when ``laser_wavelength_nm`` is ~355 nm
         (Nd:YAG).
 
-        If ``spectrum.attrs['LaserWaveLength']`` is outside 354–356 nm,
+        If ``spectrum.attrs['laser_wavelength_nm']`` is outside 354–356 nm,
         returns ``spectrum`` unchanged.
 
         Searches 1064 / 532 / 355 / 266 nm (±2.5 nm); replaces ~1 nm
@@ -408,7 +408,7 @@ class CosmicRayRemover:
         parts: list[str] = []
         if da.name:
             parts.append(f"name={da.name!r}")
-        for key in ("Title", "filename", "source"):
+        for key in ("title", "filename", "source"):
             if key in da.attrs:
                 parts.append(f"{key}={da.attrs[key]!r}")
                 break

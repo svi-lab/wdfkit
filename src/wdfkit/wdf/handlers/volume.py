@@ -51,9 +51,7 @@ def build_dataarray(parsed: "ParsedWDF") -> xr.DataArray:
         coords["z"] = ("z", z_3d[:, 0, 0])
 
     attrs = make_attrs(parsed, "volume")
-    attrs["ScanShape"] = (nz, ny, nx)
-    attrs["RowCoord"] = "z"
-    attrs["ColCoord"] = "x"
+    attrs["shape"] = (nz, ny, nx)
 
     return sort_spectral(
         xr.DataArray(

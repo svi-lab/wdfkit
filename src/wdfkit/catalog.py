@@ -9,6 +9,9 @@ from typing import TYPE_CHECKING
 
 import pandas as pd
 
+from ._shared.time_utils import format_datetime
+from .wdf._helpers.constants import MEASUREMENT_TYPES, SCAN_TYPES
+
 if TYPE_CHECKING:
     from .reader import WDFReader
 
@@ -30,6 +33,8 @@ class Catalog:
 
     def summary(self) -> pd.DataFrame:
         """Return counts and date range grouped by ``scan_type``."""
+        if self._df.empty:
+            return pd.DataFrame(columns=["scan_type", "count", "start", "end"])
         grp = self._df.groupby("scan_type", sort=False)
         return grp.agg(
             count=("filename", "count"),
@@ -48,6 +53,11 @@ class Catalog:
         """
         from .reader import WDFReader
 
+        if not (1 <= idx <= len(self._paths)):
+            raise IndexError(
+                f"idx={idx} is out of range for catalog of "
+                f"{len(self._paths)} file(s) (1-based)"
+            )
         return WDFReader(self._paths[idx - 1])
 
     def __len__(self) -> int:
@@ -80,38 +90,21 @@ def catalog(
     paths = sorted(root.glob(pattern))
 
     rows = []
+    good_paths: list[Path] = []
     for p in paths:
         try:
             parsed = parse_wdf_header(p)
         except Exception:
             continue
 
-        _SCAN_TYPES = {
-            0: "Unspecified",
-            1: "Static",
-            2: "Continuous",
-            3: "StepRepeat",
-            4: "FilterScan",
-            5: "FilterImage",
-            6: "StreamLine",
-            7: "StreamHR",
-            8: "Point",
-            9: "MultitrackArbitrary",
-        }
-        _MEAS_TYPES = {
-            0: "Unspecified",
-            1: "Single",
-            2: "Series",
-            3: "Map",
-        }
-
+        good_paths.append(p)
         rows.append(
             {
                 "filename": p.name,
-                "scan_type": _SCAN_TYPES.get(
+                "scan_type": SCAN_TYPES.get(
                     parsed.scan_type, str(parsed.scan_type)
                 ),
-                "measurement_type": _MEAS_TYPES.get(
+                "measurement_type": MEASUREMENT_TYPES.get(
                     parsed.measurement_type,
                     str(parsed.measurement_type),
                 ),
@@ -121,10 +114,10 @@ def catalog(
                 "exposure_time": parsed.params.get("ExposureTime"),
                 "xlist_units": parsed.params.get("XlistDataUnits"),
                 "comment": parsed.comment,
-                "start_time": parsed.acquisition_time,
-                "end_time": parsed.end_time,
+                "start_time": format_datetime(parsed.acquisition_time),
+                "end_time": format_datetime(parsed.end_time),
             }
         )
 
     df = pd.DataFrame(rows)
-    return Catalog(df, paths)
+    return Catalog(df, good_paths)

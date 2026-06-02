@@ -32,8 +32,8 @@ _NOTCH_FULL_WIDTH_NM = 1.0
 
 
 def read_laser_wavelength_nm(attrs: Mapping[str, Any]) -> float | None:
-    """Return ``LaserWaveLength`` from ``attrs``, or ``None``."""
-    raw = attrs.get("LaserWaveLength")
+    """Return ``laser_wavelength_nm`` from ``attrs``, or ``None``."""
+    raw = attrs.get("laser_wavelength_nm")
     if raw is None:
         return None
     try:
@@ -205,7 +205,7 @@ def harmonic_correct_dataarray(
     *,
     spectral_dim: str | None = None,
 ) -> xr.DataArray:
-    """If ``LaserWaveLength`` is ~355 nm, notch laser harmonics on every
+    """If ``laser_wavelength_nm`` is ~355 nm, notch laser harmonics on every
     slice.
 
     If any notch runs, merges ``treatments['Laser harmonic removal']``.

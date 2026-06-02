@@ -3,11 +3,11 @@
 
 from __future__ import annotations
 
-import os
 from typing import TYPE_CHECKING
 
 import xarray as xr
 
+from ..._shared.time_utils import format_datetime
 from .._helpers.utils import hr_filesize
 
 if TYPE_CHECKING:
@@ -38,45 +38,52 @@ def sort_spectral(da: "xr.DataArray") -> "xr.DataArray":
 
 
 def make_attrs(parsed: "ParsedWDF", kind: str) -> dict:
-    """Merge WDF1/WMAP params with the required new attrs for a DataArray.
+    """Build the user-facing attrs dict for a DataArray.
 
-    All existing param keys are preserved for backward compatibility.
+    Only scientifically relevant keys are included.  Internal parser fields
+    (WdfFlag, Capacity, ApplicationName, etc.) are intentionally omitted.
+    Map-geometry keys (MapAreaType, StepSizes, NSteps, LineFocusSize) are
+    present only when a WMAP block exists.
     """
-    attrs: dict = {}
-    attrs.update(parsed.params)
-    attrs.update(parsed.map_params)
+    p = parsed.params
 
-    # Normalize WMAP InitialCoordinates from numpy array to dict
-    if "InitialCoordinates" in attrs:
-        ic = attrs["InitialCoordinates"]
-        if not isinstance(ic, dict):
-            attrs["InitialCoordinates"] = {
-                "x": float(ic[0]),
-                "y": float(ic[1]),
-                "z": float(ic[2]),
-            }
+    attrs: dict = {
+        "title": p.get("Title", ""),
+        "comment": parsed.comment,
+        "laser_wavelength_nm": p.get("LaserWaveLength"),
+        "scan_type": p.get("ScanType"),
+        "measurement_type": p.get("MeasurementType"),
+        "n_spectra": p.get("Count"),
+        "n_points": p.get("PointsPerSpectrum"),
+        "n_accumulations": p.get("AccumulationCount"),
+        "start_time": format_datetime(parsed.acquisition_time),
+        "end_time": format_datetime(parsed.end_time),
+        "spectral_units": parsed.xlst.units,
+        "file_size": hr_filesize(parsed.filesize),
+        "kind": kind,
+        "treatments": {},
+    }
 
-    # For scan types without a WMAP block (series, line_xy, points),
-    # fall back to the WXIS stage position.
-    if not attrs.get("InitialCoordinates"):
-        attrs["InitialCoordinates"] = parsed.stage_xyz
-
-    # --- genuinely new attrs (no existing equivalent in params) ---
-    attrs["kind"] = kind
-    attrs["spectral_units"] = parsed.xlst.units
-    attrs["spectral_data_type"] = parsed.xlst.data_type
-    if parsed.wmap is not None:
-        attrs["wmap_flag"] = parsed.wmap.flag
-
-    # --- file metadata ---
-    attrs["Folder name"], attrs["Filename"] = os.path.split(parsed.filename)
-    attrs["FileSize"] = hr_filesize(parsed.filesize)
-    attrs["treatments"] = {}
-
-    # --- optional extras ---
+    # Optional acquisition settings (present only when WXDA block exists)
     if parsed.exposure_time is not None:
-        attrs["ExposureTime"] = parsed.exposure_time
+        attrs["exposure_time"] = parsed.exposure_time
     if parsed.laser_power is not None:
-        attrs["LaserPower"] = parsed.laser_power
+        attrs["laser_power"] = parsed.laser_power
+
+    # Stage / map coordinates
+    if parsed.wmap is not None:
+        mp = parsed.map_params
+        ic = mp.get("InitialCoordinates")
+        attrs["initial_coordinates"] = (
+            {"x": float(ic[0]), "y": float(ic[1]), "z": float(ic[2])}
+            if ic is not None and not isinstance(ic, dict)
+            else ic
+        )
+        attrs["map_type"] = mp.get("MapAreaType")
+        attrs["step_sizes_um"] = mp.get("StepSizes")
+        attrs["n_steps"] = mp.get("NbSteps")
+        attrs["line_focus_size"] = mp.get("LineFocusSize")
+    else:
+        attrs["initial_coordinates"] = parsed.stage_xyz
 
     return attrs

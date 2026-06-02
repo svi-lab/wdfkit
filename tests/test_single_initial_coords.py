@@ -1,4 +1,4 @@
-"""Tests for attrs["InitialCoordinates"] on 1-D (Single) DataArrays."""
+"""Tests for attrs["initial_coordinates"] on 1-D (Single) DataArrays."""
 
 from __future__ import annotations
 
@@ -24,22 +24,22 @@ _FILES_BY_KIND = [
 def test_initial_coordinates_present(kind, fname):
     da = wdfkit.read(TEST_DATA / fname)
     assert (
-        "InitialCoordinates" in da.attrs
-    ), f"{kind}: attrs['InitialCoordinates'] missing"
+        "initial_coordinates" in da.attrs
+    ), f"{kind}: attrs['initial_coordinates'] missing"
 
 
 @pytest.mark.parametrize("kind,fname", _FILES_BY_KIND)
 def test_initial_coordinates_keys(kind, fname):
     da = wdfkit.read(TEST_DATA / fname)
-    assert set(da.attrs["InitialCoordinates"].keys()) == _EXPECTED_KEYS, (
+    assert set(da.attrs["initial_coordinates"].keys()) == _EXPECTED_KEYS, (
         f"{kind}: expected keys {_EXPECTED_KEYS}, "
-        f"got {set(da.attrs['InitialCoordinates'].keys())}"
+        f"got {set(da.attrs['initial_coordinates'].keys())}"
     )
 
 
 def test_single_initial_coordinates_values():
     da = wdfkit.read(TEST_DATA / "SiWafer_SingleScan.wdf")
-    ic = da.attrs["InitialCoordinates"]
+    ic = da.attrs["initial_coordinates"]
     assert ic["x"] == 0, f"x={ic['x']!r}"
     assert ic["y"] == 0, f"y={ic['y']!r}"
     assert ic["z"] == 0, f"z={ic['z']!r}"

@@ -44,9 +44,7 @@ def build_dataarray(parsed: "ParsedWDF") -> xr.DataArray:
         coords["y"] = ("y", y_nx_ny.T[:, 0])
 
     attrs = make_attrs(parsed, "raster_columnmajor")
-    attrs["ScanShape"] = (ny, nx)
-    attrs["RowCoord"] = "y"
-    attrs["ColCoord"] = "x"
+    attrs["shape"] = (ny, nx)
 
     return sort_spectral(
         xr.DataArray(

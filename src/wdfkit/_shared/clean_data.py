@@ -16,7 +16,7 @@ _TREATMENT_KEY = "Oversaturation Check"
 
 
 def _extract_filename(da: xr.DataArray) -> str:
-    for key in ("filename", "Title", "source"):
+    for key in ("filename", "title", "source"):
         val = da.attrs.get(key)
         if val:
             return str(val)
