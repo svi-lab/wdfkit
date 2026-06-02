@@ -1,0 +1,20 @@
+{
+  "author_names": "Danila Shiryaev",
+  "author_emails": "dshirya@gmail.com",
+  "maintainer_names": "Danila Shiryaev",
+  "maintainer_emails": "dshirya@gmail.com",
+  "maintainer_github_usernames": "dshirya",
+  "contributors": "Danila Shiryaev",
+  "license_holders": "SVI - Saint-Gobain Research Paris",
+  "project_name": "wdfkit",
+  "github_username_or_orgname": "dshirya",
+  "github_repo_name": "wdfkit",
+  "conda_pypi_package_dist_name": "wdfkit",
+  "package_dir_name": "wdfkit",
+  "project_short_description": "Python package for WDF data treatment",
+  "project_keywords": "WDF, Raman, PL",
+  "minimum_supported_python_version": "3.12",
+  "maximum_supported_python_version": "3.14",
+  "project_needs_c_code_compiled": "No",
+  "project_has_gui_tests": "No"
+}

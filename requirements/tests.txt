@@ -1,0 +1,7 @@
+flake8
+pre-commit
+pytest
+codecov
+coverage
+pytest-cov
+pytest-env

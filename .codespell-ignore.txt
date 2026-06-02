@@ -1,0 +1,4 @@
+# Neodymium element symbol (Nd:YAG laser); not "And"
+Nd
+# Neutral-density filter abbreviation; not "AND" or "2ND"
+nd

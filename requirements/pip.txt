@@ -1,0 +1,9 @@
+numpy
+matplotlib
+xarray
+Pillow
+scikit-learn
+scikit-image
+scipy
+dask
+psutil
