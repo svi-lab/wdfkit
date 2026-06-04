@@ -30,7 +30,7 @@ def parse_wdf1(ctx: ParseContext) -> None:
         )
         ctx.params["AccumulationCount"] = read_from_file(ctx.f)
         ctx.params["YlistLength"] = read_from_file(ctx.f)
-        ctx.params["XlistLength"] = read_from_file(ctx.f)
+        read_from_file(ctx.f)  # XlistLength — same as PointsPerSpectrum, skip
         ctx.params["DataOriginCount"] = read_from_file(ctx.f)
         ctx.params["ApplicationName"] = read_from_file(ctx.f, "|S24").decode()
         version = read_from_file(ctx.f, np.uint16, count=4)

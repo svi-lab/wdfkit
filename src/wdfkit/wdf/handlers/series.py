@@ -42,18 +42,12 @@ def build_dataarray(parsed: "ParsedWDF") -> xr.DataArray:
         # Last resort: use integer index
         row_dim = "index"
         row_values = np.arange(nspectra)
-        row_units = ""
     else:
         row_dim = primary.data_type  # e.g. "SpatialZ"
         row_values = primary.values[:nspectra]
-        row_units = primary.units
 
     attrs = make_attrs(parsed, "series")
-    attrs["ScanShape"] = (nspectra, 1)
-    attrs["RowCoord"] = row_dim
-    attrs["ColCoord"] = None
-    if row_units:
-        attrs["units_axis"] = row_units
+    attrs["shape"] = (nspectra, 1)
 
     sc = spectral_coord(parsed)
     da = xr.DataArray(

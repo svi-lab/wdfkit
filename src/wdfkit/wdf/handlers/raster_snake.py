@@ -45,9 +45,7 @@ def build_dataarray(parsed: "ParsedWDF") -> xr.DataArray:
         if orgn_y is not None:
             coords["y"] = ("point", orgn_y.values[:nspectra])
         attrs = make_attrs(parsed, "raster_snake")
-        attrs["ScanShape"] = (nspectra, 1)
-        attrs["RowCoord"] = "point"
-        attrs["ColCoord"] = None
+        attrs["shape"] = (nspectra, 1)
         return sort_spectral(
             xr.DataArray(
                 data, dims=("point", sdim), coords=coords, attrs=attrs
@@ -72,9 +70,7 @@ def build_dataarray(parsed: "ParsedWDF") -> xr.DataArray:
         coords["y"] = ("y", y_2d[:, 0])
 
     attrs = make_attrs(parsed, "raster_snake")
-    attrs["ScanShape"] = (ny, nx)
-    attrs["RowCoord"] = "y"
-    attrs["ColCoord"] = "x"
+    attrs["shape"] = (ny, nx)
 
     return sort_spectral(
         xr.DataArray(

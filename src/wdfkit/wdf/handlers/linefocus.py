@@ -77,9 +77,7 @@ def build_dataarray(parsed: "ParsedWDF") -> xr.DataArray:
             coords["y"] = ("y", y_2d[:, 0])
 
         attrs = make_attrs(parsed, "linefocus")
-        attrs["ScanShape"] = (ny_map, nx_map)
-        attrs["RowCoord"] = "y"
-        attrs["ColCoord"] = "x"
+        attrs["shape"] = (ny_map, nx_map)
         return sort_spectral(
             xr.DataArray(
                 cube,
@@ -91,9 +89,7 @@ def build_dataarray(parsed: "ParsedWDF") -> xr.DataArray:
     else:
         coords["point"] = np.arange(nspectra)
         attrs = make_attrs(parsed, "linefocus")
-        attrs["ScanShape"] = (nspectra, 1)
-        attrs["RowCoord"] = "point"
-        attrs["ColCoord"] = None
+        attrs["shape"] = (nspectra, 1)
         return sort_spectral(
             xr.DataArray(
                 cube,

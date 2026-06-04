@@ -56,15 +56,13 @@ class WDFReader:
         path: StrPath,
         *,
         verbose: bool = False,
-        time_coord: str = "seconds_elapsed",
+        time_coord: str | None = "seconds_elapsed",
         spectral_dim: str | None = None,
         chunks: bool | int = False,
     ) -> None:
         self._path = os.fspath(path)
         self._verbose = verbose
-        self._time_coord = (
-            None if time_coord != "seconds_elapsed" else time_coord
-        )
+        self._time_coord = time_coord
         self._spectral_dim = spectral_dim
         self._chunks = chunks
 
@@ -274,6 +272,7 @@ def read(
     path: StrPath,
     *,
     verbose: bool = False,
+    time_coord: str | None = "seconds_elapsed",
     spectral_dim: str | None = None,
     chunks: bool | int = False,
 ) -> xr.DataArray:
@@ -283,6 +282,9 @@ def read(
     ----------
     path
         Path to the ``.wdf`` file.
+    time_coord
+        Name for the elapsed-time coordinate on Series scans.
+        ``None`` disables it (absolute timestamps used instead).
     spectral_dim
         Override for the spectral-axis dimension name.
     chunks
@@ -296,6 +298,7 @@ def read(
     parsed = parse_wdf_to_parsed(
         path,
         verbose=verbose,
+        time_coord=time_coord,
         spectral_dim=spectral_dim,
         chunks=chunks,
     )

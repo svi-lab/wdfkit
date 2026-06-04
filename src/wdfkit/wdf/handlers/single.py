@@ -24,9 +24,7 @@ def build_dataarray(parsed: "ParsedWDF") -> xr.DataArray:
         spectrum = data
 
     attrs = make_attrs(parsed, "single")
-    attrs["ScanShape"] = (1, 1)
-    attrs["RowCoord"] = None
-    attrs["ColCoord"] = None
+    attrs["shape"] = (1, 1)
 
     sc = spectral_coord(parsed)
     da = xr.DataArray(

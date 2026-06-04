@@ -40,19 +40,13 @@ def test_read_wdf_single_scan_matches_golden():
 
     # New shape: single → 1-D (spectral_dim,)
     assert dict(da.sizes) == {"wavelength_nm": 9341}
-    assert da.attrs["WdfFlag"] == "WdfXYXY"
-    assert da.attrs["MeasurementType"] == "Single"
-    assert da.attrs["PointsPerSpectrum"] == 9341
-    assert da.attrs["Capacity"] == 1
-    assert da.attrs["Count"] == 1
-    assert da.attrs["ScanShape"] == (1, 1)
-    assert da.attrs["ColCoord"] is None
-    assert da.attrs["RowCoord"] is None
-    assert da.attrs["Filename"] == "test.wdf"
-    assert da.attrs["Folder name"] == str(path.parent)
-    assert da.attrs["FileSize"] == "357.5kB"
-    assert da.attrs["SpectralUnits"] == "Counts"
-    assert np.isclose(da.attrs["LaserWaveLength"], 354.74)
+    assert da.attrs["measurement_type"] == "Single"
+    assert da.attrs["n_points"] == 9341
+    assert da.attrs["n_spectra"] == 1
+    assert da.attrs["shape"] == (1, 1)
+    assert da.attrs["file_size"] == "357.5kB"
+    assert da.attrs["kind"] == "single"
+    assert np.isclose(da.attrs["laser_wavelength_nm"], 354.74)
     assert img is None
 
     # Spectral values (sorted ascending by nm)
@@ -73,17 +67,12 @@ def test_read_wdf_map_matches_golden():
 
     # New shape: raster_rowmajor → (y, x, spectral_dim)
     assert dict(da.sizes) == {"y": 17, "x": 25, "wavelength_nm": 9341}
-    assert da.attrs["WdfFlag"] == "16: UnknownFlag (LiveTrack?)"
-    assert da.attrs["MeasurementType"] == "Map"
-    assert da.attrs["Capacity"] == 425
-    assert da.attrs["Count"] == 425
-    assert da.attrs["PointsPerSpectrum"] == 9341
-    assert da.attrs["ScanShape"] == (17, 25)
-    assert da.attrs["ColCoord"] == "x"
-    assert da.attrs["RowCoord"] == "y"
-    assert da.attrs["Filename"] == "test_map.wdf"
-    assert da.attrs["Folder name"] == str(path.parent)
-    assert da.attrs["FileSize"] == "16.2MB"
+    assert da.attrs["measurement_type"] == "Map"
+    assert da.attrs["n_spectra"] == 425
+    assert da.attrs["n_points"] == 9341
+    assert da.attrs["shape"] == (17, 25)
+    assert da.attrs["file_size"] == "16.2MB"
+    assert da.attrs["kind"] == "raster_rowmajor"
     assert img is not None
     assert getattr(img, "mode") == "RGB"
 
@@ -131,20 +120,20 @@ def test_exposure_time_and_laser_power_single_scan():
     path = TEST_DATA / "test.wdf"
     da, _ = WDFReader(path)
 
-    assert "ExposureTime" in da.attrs
-    assert np.isclose(da.attrs["ExposureTime"], 10.0)
+    assert "exposure_time" in da.attrs
+    assert np.isclose(da.attrs["exposure_time"], 10.0)
 
-    assert "LaserPower" in da.attrs
-    assert np.isclose(da.attrs["LaserPower"], 10.0)
+    assert "laser_power" in da.attrs
+    assert np.isclose(da.attrs["laser_power"], 10.0)
 
 
 def test_exposure_time_and_laser_power_map():
-    """ExposureTime and LaserPower are read correctly for 2-D map data."""
+    """exposure_time and laser_power are read correctly for 2-D map data."""
     path = TEST_DATA / "test_map.wdf"
     da, _ = WDFReader(path)
 
-    assert "ExposureTime" in da.attrs
-    assert np.isclose(da.attrs["ExposureTime"], 10.0)
+    assert "exposure_time" in da.attrs
+    assert np.isclose(da.attrs["exposure_time"], 10.0)
 
-    assert "LaserPower" in da.attrs
-    assert np.isclose(da.attrs["LaserPower"], 5.0)
+    assert "laser_power" in da.attrs
+    assert np.isclose(da.attrs["laser_power"], 5.0)

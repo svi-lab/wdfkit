@@ -34,9 +34,7 @@ def build_dataarray(parsed: "ParsedWDF") -> xr.DataArray:
         coords["y"] = ("point", orgn_y.values[:nspectra])
 
     attrs = make_attrs(parsed, "points")
-    attrs["ScanShape"] = (nspectra, 1)
-    attrs["RowCoord"] = "point"
-    attrs["ColCoord"] = None
+    attrs["shape"] = (nspectra, 1)
 
     return sort_spectral(
         xr.DataArray(
