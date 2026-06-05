@@ -22,14 +22,14 @@ def test_classify_line_xy(fname, n):
 @pytest.mark.parametrize("fname,n", _FILES)
 def test_line_xy_shape_and_dims(fname, n):
     da = wdfkit.read(TEST_DATA / fname)
-    assert da.dims == ("point", "raman_shift"), f"Got {da.dims}"
+    assert da.dims == ("point", "spectral"), f"Got {da.dims}"
     assert da.shape == (n, 1015)
 
 
 @pytest.mark.parametrize("fname,n", _FILES)
 def test_spectral_axis_last(fname, n):
     da = wdfkit.read(TEST_DATA / fname)
-    assert da.dims[-1] == "raman_shift"
+    assert da.dims[-1] == "spectral"
 
 
 @pytest.mark.parametrize("fname,n", _FILES)
@@ -43,3 +43,4 @@ def test_xy_coords_present(fname, n):
 def test_kind_attr(fname, n):
     da = wdfkit.read(TEST_DATA / fname)
     assert da.attrs["kind"] == "line_xy"
+    assert da.attrs["data_type"] == "sequence"

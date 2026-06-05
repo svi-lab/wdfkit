@@ -22,15 +22,15 @@ def test_classify_raster_columnmajor(fname, ny, nx):
 @pytest.mark.parametrize("fname,ny,nx", _FILES)
 def test_shape_and_dims(fname, ny, nx):
     da = wdfkit.read(TEST_DATA / fname)
-    assert da.dims[:2] == ("y", "x"), f"Got {da.dims}"
-    assert da.dims[-1] == "raman_shift"
+    assert da.dims[:2] == ("row", "column"), f"Got {da.dims}"
+    assert da.dims[-1] == "spectral"
     assert da.shape[:2] == (ny, nx)
 
 
 @pytest.mark.parametrize("fname,ny,nx", _FILES)
 def test_spectral_axis_last(fname, ny, nx):
     da = wdfkit.read(TEST_DATA / fname)
-    assert da.dims[-1] == "raman_shift"
+    assert da.dims[-1] == "spectral"
 
 
 def test_orgn_x_constant_within_rows():
@@ -56,3 +56,6 @@ def test_kind_attr():
         / "SiWafer_StreamLineImageAcquisition_DataOptimisedExposureTime.wdf"
     )
     assert da.attrs["kind"] == "raster_columnmajor"
+    assert da.attrs["data_type"] == "grid"
+    assert da.attrs["row_axis"] == "y"
+    assert da.attrs["column_axis"] == "x"

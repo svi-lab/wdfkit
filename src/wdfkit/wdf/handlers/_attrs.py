@@ -15,13 +15,12 @@ if TYPE_CHECKING:
 
 
 def spectral_coord(parsed: "ParsedWDF") -> tuple:
-    """Return an ``(dim_name, values, attrs)`` tuple for the spectral coord."""
-    sdim = parsed.xlst.dim_name
+    """Return ``("spectral", values, attrs)`` for the spectral coord."""
     attrs: dict = {}
     if parsed.xlst.coord_units:
         attrs["units"] = parsed.xlst.coord_units
     attrs["long_name"] = parsed.xlst.units
-    return sdim, parsed.xlst.values, attrs
+    return "spectral", parsed.xlst.values, attrs
 
 
 def sort_spectral(da: "xr.DataArray") -> "xr.DataArray":

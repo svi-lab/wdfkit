@@ -217,7 +217,7 @@ def parse_data(ctx: "ParseContext") -> None:
     name = "DATA"
     for i in indices_named(ctx.blocks, name):
         ctx.print_block_header(name, i)
-        data_offset = ctx.blocks["BlockOffsets"][i] + _BLOCK_HEADER_BYTES
+        data_offset = ctx.blocks[i].offset + _BLOCK_HEADER_BYTES
 
         if ctx.chunks is not False:
             target_mb = (

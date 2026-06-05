@@ -23,13 +23,13 @@ def test_series_returns_dataarray():
 
 def test_series_shape_and_dims():
     da = wdfkit.read(TEST_DATA / _FILE)
-    assert da.dims == ("SpatialZ", "raman_shift"), f"Got {da.dims}"
+    assert da.dims == ("point", "spectral"), f"Got {da.dims}"
     assert da.shape == (10, 1015)
 
 
 def test_spectral_axis_last():
     da = wdfkit.read(TEST_DATA / _FILE)
-    assert da.dims[-1] == "raman_shift"
+    assert da.dims[-1] == "spectral"
 
 
 def test_primary_axis_length_matches_nspectra():
@@ -41,8 +41,26 @@ def test_primary_axis_length_matches_nspectra():
 
 def test_series_z_coord_present():
     da = wdfkit.read(TEST_DATA / _FILE)
-    assert "SpatialZ" in da.coords
-    assert len(da["SpatialZ"]) == 10
+    assert "z" in da.coords
+    assert len(da["z"]) == 10
+    assert da.attrs["data_type"] == "sequence"
+
+
+def test_series_point_coord_is_range():
+    """point dim must be a 0-based integer index."""
+    import numpy as np
+
+    da = wdfkit.read(TEST_DATA / _FILE)
+    assert "point" in da.coords
+    np.testing.assert_array_equal(da["point"].values, np.arange(10))
+
+
+def test_series_time_coord_present():
+    """Time ORGN entry must appear as a 'time' coord on the point dim."""
+    da = wdfkit.read(TEST_DATA / _FILE)
+    assert "time" in da.coords, "expected 'time' coord from ORGN Time entry"
+    assert da["time"].shape == (10,)
+    assert da["time"].values.dtype.kind == "f"  # float seconds-elapsed
 
 
 def test_kind_attr():

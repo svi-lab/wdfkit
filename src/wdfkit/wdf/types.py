@@ -77,9 +77,9 @@ class UnitType(IntEnum):
     Arbitrary = 0
     RamanShift = 1
     Wavenumber = 2
-    Nanometre = 3
+    Nanometer = 3
     ElectronVolt = 4
-    Micrometre = 5
+    Micrometer = 5
     Counts = 6
     Electrons = 7
     Millimetres = 8
@@ -102,40 +102,9 @@ class UnitType(IntEnum):
     Microseconds = 25
 
 
-# Maps XLST units string (from internal/constants.py DATA_UNITS_LIST)
-# to xarray dimension name for the spectral axis.
-_SPECTRAL_DIM_BY_UNIT: dict[str, str] = {
-    "Arbitrary": "spectral",
-    "RamanShift": "raman_shift",
-    "Wavenumber": "wavenumber",
-    "Nanometre": "wavelength_nm",
-    "ElectronVolt": "energy_eV",
-    "Micron": "wavelength_um",
-    "Pixels": "pixel",
-    "Counts": "spectral_channel",
-}
-
-_SPECTRAL_DIM_BY_DTYPE: dict[str, str] = {
-    "Spectral": "spectral",
-    "Arbitrary": "spectral",
-}
-
-
-def get_spectral_dim_name(
-    xlst_units: str,
-    xlst_data_type: str = "Spectral",
-    override: str | None = None,
-) -> str:
-    """Return the xarray dimension name for the spectral axis.
-
-    Prefers *xlst_units* (more specific), falls back to *xlst_data_type*,
-    then to ``"spectral"``.  If *override* is given (not ``None`` or
-    ``"auto"``), it is returned as-is.
-    """
-    if override and override != "auto":
-        return override
-    return (
-        _SPECTRAL_DIM_BY_UNIT.get(xlst_units)
-        or _SPECTRAL_DIM_BY_DTYPE.get(xlst_data_type)
-        or "spectral"
-    )
+def _enum_name(cls: "type[IntEnum]", n: int) -> str:
+    """Return the enum member name for integer n, or str(n) if unknown."""
+    try:
+        return cls(n).name
+    except ValueError:
+        return str(n)

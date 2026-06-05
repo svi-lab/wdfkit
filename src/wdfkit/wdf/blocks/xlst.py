@@ -3,26 +3,22 @@
 
 from __future__ import annotations
 
-from .._helpers import constants as const
 from .._helpers.binary_io import read_from_file
 from .._helpers.block_index import indices_named
 from .._helpers.parse_context import ParseContext
 from .._helpers.spectral import resolve_spectral_axis
+from ..types import DataType, UnitType, _enum_name
 
 
 def parse_xlst(ctx: ParseContext) -> None:
     name = "XLST"
     for i in indices_named(ctx.blocks, name):
         ctx.print_block_header(name, i)
-        ctx.f.seek(ctx.blocks["BlockOffsets"][i] + 16)
+        ctx.f.seek(ctx.blocks[i].offset + 16)
         xldt = read_from_file(ctx.f)
-        ctx.params["XlistDataType"] = const.DATA_TYPES.get(
-            xldt, f"{xldt}_unknown"
-        )
+        ctx.params["XlistDataType"] = _enum_name(DataType, xldt)
         xldu = read_from_file(ctx.f)
-        ctx.params["XlistDataUnits"] = const.DATA_UNITS.get(
-            xldu, f"{xldu}_unknown"
-        )
+        ctx.params["XlistDataUnits"] = _enum_name(UnitType, xldu)
         x_values = read_from_file(ctx.f, "<f", count=ctx.npoints)
         spectral_spec = resolve_spectral_axis(
             ctx.params["XlistDataUnits"], ctx.spectral_dim

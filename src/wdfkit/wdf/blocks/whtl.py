@@ -18,8 +18,8 @@ def parse_whtl(ctx: ParseContext) -> None:
     name = "WHTL"
     for i in indices_named(ctx.blocks, name):
         ctx.print_block_header(name, i)
-        body_size = ctx.blocks["BlockSizes"][i] - 16
-        ctx.f.seek(ctx.blocks["BlockOffsets"][i] + 16)
+        body_size = ctx.blocks[i].size - 16
+        ctx.f.seek(ctx.blocks[i].offset + 16)
         raw_bytes = ctx.f.read(body_size)
 
         # Extract the raw JPEG payload (FF D8 FF ... FF D9).

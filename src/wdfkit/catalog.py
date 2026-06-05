@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING
 import pandas as pd
 
 from ._shared.time_utils import format_datetime
-from .wdf._helpers.constants import MEASUREMENT_TYPES, SCAN_TYPES
+from .wdf.types import MeasurementType, ScanType, _enum_name
 
 if TYPE_CHECKING:
     from .reader import WDFReader
@@ -101,12 +101,9 @@ def catalog(
         rows.append(
             {
                 "filename": p.name,
-                "scan_type": SCAN_TYPES.get(
-                    parsed.scan_type, str(parsed.scan_type)
-                ),
-                "measurement_type": MEASUREMENT_TYPES.get(
-                    parsed.measurement_type,
-                    str(parsed.measurement_type),
+                "scan_type": _enum_name(ScanType, parsed.scan_type),
+                "measurement_type": _enum_name(
+                    MeasurementType, parsed.measurement_type
                 ),
                 "nspectra": parsed.nspectra,
                 "laser_wavelength": parsed.laser_wavelength,
