@@ -21,26 +21,10 @@ wdfkit.reader
     :undoc-members:
     :show-inheritance:
 
-wdfkit.cosmic\_ray
-~~~~~~~~~~~~~~~~~~
+wdfkit.catalog
+~~~~~~~~~~~~~~
 
-.. automodule:: wdfkit.cosmic_ray
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-wdfkit.spectra\_cleaner
-~~~~~~~~~~~~~~~~~~~~~~~
-
-.. automodule:: wdfkit.spectra_cleaner
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-wdfkit.spectra\_smoother
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. automodule:: wdfkit.spectra_smoother
+.. automodule:: wdfkit.catalog
     :members:
     :undoc-members:
     :show-inheritance:
