@@ -32,7 +32,23 @@ def test_xlst_dtype_units(fname):
     assert len(r.xlst.units) > 0
 
 
+def test_spectral_coord_attrs():
+    """spectral coord must carry 'units' and 'long_name' attrs."""
+    da, _ = WDFReader(TEST_DATA / "SiWafer_SingleScan.wdf")
+    sc = da["spectral"]
+    assert "units" in sc.attrs, "spectral coord missing 'units'"
+    assert "long_name" in sc.attrs, "spectral coord missing 'long_name'"
+    assert len(sc.attrs["units"]) > 0
+    assert len(sc.attrs["long_name"]) > 0
+
+
 def test_xlst_sorted():
-    r = WDFReader(TEST_DATA / "SiWafer_SingleScan.wdf")
-    vals = r.xlst.values
-    assert float(vals[0]) != float(vals[-1])
+    """After sort_spectral(), spectral axis must be strictly ascending."""
+    import numpy as np
+
+    da, _ = WDFReader(TEST_DATA / "SiWafer_SingleScan.wdf")
+    vals = da["spectral"].values
+    assert float(vals[0]) < float(vals[-1]), "spectral axis first > last"
+    assert np.all(
+        np.diff(vals) > 0
+    ), "spectral axis not monotonically ascending"

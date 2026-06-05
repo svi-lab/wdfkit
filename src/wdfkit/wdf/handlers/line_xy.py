@@ -13,10 +13,12 @@ from ._attrs import make_attrs, sort_spectral, spectral_coord
 if TYPE_CHECKING:
     from ..parsed import ParsedWDF
 
+from ..types import MapFlag, MeasurementType
+from .base import ScanHandler
+
 
 def build_dataarray(parsed: "ParsedWDF") -> xr.DataArray:
-    """Return a 2-D DataArray ``(point, spectral_dim)`` with x/y coords."""
-    sdim = parsed.xlst.dim_name
+    """Return a 2-D DataArray ``("point", "spectral")`` with x/y coords."""
     nspectra = parsed.nspectra
     data = np.asarray(parsed.data)
 
@@ -24,7 +26,7 @@ def build_dataarray(parsed: "ParsedWDF") -> xr.DataArray:
     sc = spectral_coord(parsed)
     coords: dict = {
         "point": point_idx,
-        sdim: (sdim, sc[1], sc[2]),
+        "spectral": ("spectral", sc[1], sc[2]),
     }
     orgn_x = parsed.orgn_by_type("SpatialX")
     orgn_y = parsed.orgn_by_type("SpatialY")
@@ -35,12 +37,27 @@ def build_dataarray(parsed: "ParsedWDF") -> xr.DataArray:
 
     attrs = make_attrs(parsed, "line_xy")
     attrs["shape"] = (nspectra, 1)
+    attrs["data_type"] = "sequence"
 
     return sort_spectral(
         xr.DataArray(
             data,
-            dims=("point", sdim),
+            dims=("point", "spectral"),
             coords=coords,
             attrs=attrs,
         )
     )
+
+
+class LineXYHandler(ScanHandler):
+    kind = "line_xy"
+
+    def matches(self, parsed: "ParsedWDF") -> bool:
+        return (
+            parsed.measurement_type == MeasurementType.Map
+            and parsed.wmap is not None
+            and parsed.wmap.flag == MapFlag.XYLine
+        )
+
+    def build(self, parsed: "ParsedWDF") -> xr.DataArray:
+        return build_dataarray(parsed)

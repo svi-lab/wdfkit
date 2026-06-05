@@ -9,11 +9,12 @@ from datetime import datetime, timezone
 
 import numpy as np
 
-from .._helpers import constants as const
 from .._helpers.binary_io import read_from_file
 from .._helpers.block_index import indices_named
 from .._helpers.parse_context import ParseContext
 from .._helpers.utils import convert_time, pad_if_unfinished
+from ..error import WDFFormatError
+from ..types import DataType, UnitType, _enum_name
 
 _EPOCH = datetime(year=1601, month=1, day=1, tzinfo=timezone.utc)
 
@@ -22,24 +23,23 @@ def parse_orgn(ctx: ParseContext) -> None:
     name = "ORGN"
     for i in indices_named(ctx.blocks, name):
         ctx.print_block_header(name, i)
-        ctx.f.seek(ctx.blocks["BlockOffsets"][i] + 16)
+        ctx.f.seek(ctx.blocks[i].offset + 16)
         nb_origin_sets = read_from_file(ctx.f)
-        assert (
-            nb_origin_sets == ctx.params["DataOriginCount"]
-        ), "Not the same!?"
+        if nb_origin_sets != ctx.params["DataOriginCount"]:
+            raise WDFFormatError(
+                "ORGN origin set count",
+                ctx.params["DataOriginCount"],
+                nb_origin_sets,
+            )
         for _set_n in range(nb_origin_sets):
             raw_type = int(read_from_file(ctx.f))
             is_primary = bool(raw_type & 0x80000000)
             data_type_flag = raw_type & 0x7FFFFFFF
-            data_type = const.DATA_TYPES.get(
-                data_type_flag, f"{data_type_flag}_unknown"
-            )
+            data_type = _enum_name(DataType, data_type_flag)
             ctx.origin_is_primary.append(is_primary)
             ctx.origin_set_dtypes.append(data_type)
             coord_units_flag = read_from_file(ctx.f)
-            coord_units = const.DATA_UNITS.get(
-                coord_units_flag, f"{coord_units_flag}_unknown"
-            ).lower()
+            coord_units = _enum_name(UnitType, coord_units_flag).lower()
             ctx.origin_set_units.append(coord_units)
             label_raw = read_from_file(ctx.f, "<S16") + b"\0"
             ndx = label_raw.index(b"\0")
@@ -82,7 +82,11 @@ def parse_orgn(ctx: ParseContext) -> None:
                 # uint64 origin type (e.g. internal Renishaw flags): advance
                 # the file position but do not store — interpretation unknown.
                 read_from_file(ctx.f, "<Q", count=ctx.nspectra)
-            elif data_type_flag not in (0, 11, 16, 17):
+            elif data_type_flag == 0:
+                # Arbitrary type: consume the float64 payload to keep the
+                # file position correct, but do not store.
+                read_from_file(ctx.f, "<d", count=ctx.nspectra)
+            else:
                 coord_values = np.array(
                     np.round(
                         read_from_file(ctx.f, "<d", count=ctx.nspectra),

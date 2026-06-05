@@ -20,9 +20,10 @@ _WIRE_UNIT_DEFAULTS: dict[str, tuple[str, str]] = {
     "Arbitrary": ("spectral", "1"),
     "RamanShift": ("raman_shift", "1/cm"),
     "Wavenumber": ("wavenumber", "cm^-1"),
-    "Nanometre": ("nm", "nm"),
-    "ElectronVolt": ("eV", "eV"),
-    "Micron": ("micron", "µm"),
+    "Nanometer": ("wavelength_nm", "nm"),
+    "ElectronVolt": ("energy_eV", "eV"),
+    "Micrometer": ("wavelength_um", "µm"),
+    "Pixels": ("pixel", "px"),
     "Counts": ("spectral_channel", "counts"),
 }
 

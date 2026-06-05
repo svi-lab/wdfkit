@@ -38,19 +38,20 @@ def test_read_wdf_single_scan_matches_golden():
     path = TEST_DATA / "test.wdf"
     da, img = WDFReader(path)
 
-    # New shape: single → 1-D (spectral_dim,)
-    assert dict(da.sizes) == {"wavelength_nm": 9341}
+    # New shape: single → 1-D ("spectral",)
+    assert dict(da.sizes) == {"spectral": 9341}
     assert da.attrs["measurement_type"] == "Single"
     assert da.attrs["n_points"] == 9341
     assert da.attrs["n_spectra"] == 1
     assert da.attrs["shape"] == (1, 1)
     assert da.attrs["file_size"] == "357.5kB"
     assert da.attrs["kind"] == "single"
+    assert da.attrs["data_type"] == "single"
     assert np.isclose(da.attrs["laser_wavelength_nm"], 354.74)
     assert img is None
 
     # Spectral values (sorted ascending by nm)
-    np.testing.assert_array_equal(da["wavelength_nm"].shape, (9341,))
+    np.testing.assert_array_equal(da["spectral"].shape, (9341,))
     np.testing.assert_allclose(
         da.values[:3], [959.03619385, 961.67810059, 973.14605713]
     )
@@ -65,8 +66,8 @@ def test_read_wdf_map_matches_golden():
     path = TEST_DATA / "test_map.wdf"
     da, img = WDFReader(path)
 
-    # New shape: raster_rowmajor → (y, x, spectral_dim)
-    assert dict(da.sizes) == {"y": 17, "x": 25, "wavelength_nm": 9341}
+    # New shape: raster_rowmajor → ("row", "column", "spectral")
+    assert dict(da.sizes) == {"row": 17, "column": 25, "spectral": 9341}
     assert da.attrs["measurement_type"] == "Map"
     assert da.attrs["n_spectra"] == 425
     assert da.attrs["n_points"] == 9341
@@ -101,18 +102,20 @@ def test_wdf_reader_idempotent_same_file():
     np.testing.assert_array_equal(da_a.values, da_b.values)
 
 
-def test_spectral_dim_override_restores_legacy_name():
-    """Force spectral coordinate dimension name (e.g. ``shifts``)."""
-    path = TEST_DATA / "test.wdf"
-    da, _ = WDFReader(path, spectral_dim="shifts")
-    assert dict(da.sizes) == {"shifts": 9341}
-    assert da["shifts"].attrs.get("units") == "nm"
+def test_data_type_attrs():
+    """Every DataArray has a data_type attr describing its format."""
+    path_single = TEST_DATA / "test.wdf"
+    path_map = TEST_DATA / "test_map.wdf"
+    da_s, _ = WDFReader(path_single)
+    da_m, _ = WDFReader(path_map)
+    assert da_s.attrs["data_type"] == "single"
+    assert da_m.attrs["data_type"] == "grid"
 
 
 def test_module_level_read_returns_dataarray():
     path = TEST_DATA / "test.wdf"
     da = read(path)
-    assert dict(da.sizes) == {"wavelength_nm": 9341}
+    assert dict(da.sizes) == {"spectral": 9341}
 
 
 def test_exposure_time_and_laser_power_single_scan():

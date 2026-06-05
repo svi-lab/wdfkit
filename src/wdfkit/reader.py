@@ -73,9 +73,6 @@ class WDFReader:
             spectral_dim=self._spectral_dim,
             chunks=self._chunks,
         )
-        if spectral_dim and spectral_dim != "auto":
-            self._parsed.xlst.dim_name = spectral_dim
-
         self.data: xr.DataArray = dispatch(self._parsed)
         self.image = self._parsed.img
 
@@ -165,8 +162,8 @@ class WDFReader:
     # ------------------------------------------------------------------
 
     @property
-    def orgn(self) -> list[OrgnEntry]:
-        """List of ORGN entries (spatial / time / flags per spectrum)."""
+    def orgn(self) -> tuple[OrgnEntry, ...]:
+        """Tuple of ORGN entries (spatial / time / flags per spectrum)."""
         return self._parsed.orgn
 
     def orgn_by_type(self, data_type: str) -> OrgnEntry | None:
@@ -302,8 +299,6 @@ def read(
         spectral_dim=spectral_dim,
         chunks=chunks,
     )
-    if spectral_dim and spectral_dim != "auto":
-        parsed.xlst.dim_name = spectral_dim
     return dispatch(parsed)
 
 

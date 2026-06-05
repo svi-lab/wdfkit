@@ -19,6 +19,9 @@ from ._attrs import make_attrs, sort_spectral, spectral_coord
 if TYPE_CHECKING:
     from ..parsed import ParsedWDF
 
+from ..types import MapFlag, MeasurementType
+from .base import ScanHandler
+
 
 def build_dataarray(parsed: "ParsedWDF") -> xr.DataArray:
     """Return a 4-D DataArray ``(y, x, line_y, spectral_dim)``.
@@ -98,3 +101,17 @@ def build_dataarray(parsed: "ParsedWDF") -> xr.DataArray:
                 attrs=attrs,
             )
         )
+
+
+class LineFocusHandler(ScanHandler):
+    kind = "linefocus"
+
+    def matches(self, parsed: "ParsedWDF") -> bool:
+        return (
+            parsed.measurement_type == MeasurementType.Map
+            and parsed.wmap is not None
+            and bool(parsed.wmap.flag & MapFlag.LineFocus)
+        )
+
+    def build(self, parsed: "ParsedWDF") -> xr.DataArray:
+        return build_dataarray(parsed)

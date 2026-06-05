@@ -37,23 +37,20 @@ from .parsed import (
     XLSTInfo,
     YLSTInfo,
 )
-from .types import get_spectral_dim_name
 
 
 def _ctx_to_parsed(ctx: ParseContext) -> ParsedWDF:
     """Build an immutable :class:`~wdfkit._parsed.ParsedWDF` from a filled
     :class:`ParseContext`."""
-    # XLST — re-derive dim name using new mapping (overrides xlst.py)
+    # XLST — re-derive dim name and coord units from the spectral axis spec
     xlst_units = ctx.params.get("XlistDataUnits", "Arbitrary")
     xlst_dtype = ctx.params.get("XlistDataType", "Spectral")
-    new_sdim = get_spectral_dim_name(
-        xlst_units, xlst_dtype, override=ctx.spectral_dim
-    )
+    spectral_spec = resolve_spectral_axis(xlst_units, ctx.spectral_dim)
+    new_sdim = spectral_spec.dim_name
     # Retrieve values from coord_dict (keyed by old dim name set by xlst.py)
     old_sdim = ctx.spectral_dim_name or "spectral"
     xlst_entry = ctx.coord_dict.get(old_sdim) or ctx.coord_dict.get(new_sdim)
     xlst_values = xlst_entry[1] if xlst_entry else np.array([])
-    spectral_spec = resolve_spectral_axis(xlst_units, ctx.spectral_dim)
     xlst = XLSTInfo(
         values=np.asarray(xlst_values, dtype="float32"),
         data_type=xlst_dtype,
@@ -151,7 +148,7 @@ def _ctx_to_parsed(ctx: ParseContext) -> ParsedWDF:
         data=ctx.spectra if ctx.spectra is not None else None,
         xlst=xlst,
         ylst=ylst,
-        orgn=orgn_entries,
+        orgn=tuple(orgn_entries),
         wmap=wmap,
         img=ctx.img,
         exposure_time=ctx.params.get("ExposureTime"),
@@ -176,26 +173,24 @@ def _ctx_to_parsed(ctx: ParseContext) -> ParsedWDF:
 def _validate(ctx: ParseContext) -> None:
     """Run structural self-checks; raise :exc:`WDFFormatError` on failure."""
     blocks = ctx.blocks
-    names = blocks.get("BlockNames", [])
-    sizes = blocks.get("BlockSizes", [])
 
     def block_idx(name: str) -> int | None:
-        for i, n in enumerate(names):
-            if n == name:
+        for i, b in enumerate(blocks):
+            if b.name == name:
                 return i
         return None
 
     # WDF1 must be first, size == 512
     wdf1_i = block_idx("WDF1")
-    if wdf1_i is None or sizes[wdf1_i] != 512:
-        got = sizes[wdf1_i] if wdf1_i is not None else "absent"
+    if wdf1_i is None or blocks[wdf1_i].size != 512:
+        got = blocks[wdf1_i].size if wdf1_i is not None else "absent"
         raise WDFFormatError("WDF1 block size", 512, got)
 
     # DATA body size
     data_i = block_idx("DATA")
     if data_i is not None:
         expected_data = ctx.nspectra * ctx.npoints * 4
-        got_data = sizes[data_i] - 16
+        got_data = blocks[data_i].size - 16
         if got_data != expected_data:
             raise WDFFormatError("DATA body size", expected_data, got_data)
 
@@ -203,7 +198,7 @@ def _validate(ctx: ParseContext) -> None:
     xlst_i = block_idx("XLST")
     if xlst_i is not None:
         expected_xlst = 8 + ctx.npoints * 4
-        got_xlst = sizes[xlst_i] - 16
+        got_xlst = blocks[xlst_i].size - 16
         if got_xlst != expected_xlst:
             raise WDFFormatError("XLST body size", expected_xlst, got_xlst)
 
@@ -212,7 +207,7 @@ def _validate(ctx: ParseContext) -> None:
     ylist_length = int(ctx.params.get("YlistLength", 1))
     if ylst_i is not None:
         expected_ylst = 8 + ylist_length * 4
-        got_ylst = sizes[ylst_i] - 16
+        got_ylst = blocks[ylst_i].size - 16
         if got_ylst != expected_ylst:
             raise WDFFormatError("YLST body size", expected_ylst, got_ylst)
 
@@ -221,7 +216,7 @@ def _validate(ctx: ParseContext) -> None:
     origin_count = int(ctx.params.get("DataOriginCount", 0))
     if orgn_i is not None and origin_count > 0:
         expected_orgn = 4 + origin_count * (24 + ctx.nspectra * 8)
-        got_orgn = sizes[orgn_i] - 16
+        got_orgn = blocks[orgn_i].size - 16
         if got_orgn != expected_orgn:
             raise WDFFormatError("ORGN body size", expected_orgn, got_orgn)
 
@@ -237,11 +232,11 @@ def _validate(ctx: ParseContext) -> None:
 
     # WMAP body must be 48 bytes
     wmap_i = block_idx("WMAP")
-    if wmap_i is not None and sizes[wmap_i] - 16 != 48:
-        raise WDFFormatError("WMAP body size", 48, sizes[wmap_i] - 16)
+    if wmap_i is not None and blocks[wmap_i].size - 16 != 48:
+        raise WDFFormatError("WMAP body size", 48, blocks[wmap_i].size - 16)
 
     # Sum of all block sizes == file size
-    total = sum(sizes)
+    total = sum(b.size for b in blocks)
     if total != ctx.filesize:
         raise WDFFormatError("sum of block sizes", ctx.filesize, total)
 
@@ -294,7 +289,9 @@ def parse_wdf_to_parsed(
     try:
         file_obj = open(filename, "rb")
         if verbose:
-            print(f'Reading the file: "{str(filename).split("/")[-1]}"\n')
+            from pathlib import Path
+
+            print(f'Reading the file: "{Path(filename).name}"\n')
     except IOError as e:
         raise IOError(f"File {filename} does not exist!") from e
 

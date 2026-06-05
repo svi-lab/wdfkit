@@ -61,10 +61,9 @@ def parse_wxis(ctx: ParseContext) -> None:
     name = "WXIS"
     for i in indices_named(ctx.blocks, name):
         ctx.print_block_header(name, i)
-        block_offset = ctx.blocks["BlockOffsets"][i]
-        block_size = ctx.blocks["BlockSizes"][i]
-        ctx.f.seek(block_offset + 16)
-        payload = ctx.f.read(block_size - 16)
+        block = ctx.blocks[i]
+        ctx.f.seek(block.offset + 16)
+        payload = ctx.f.read(block.size - 16)
 
         pset = parse_pset_block(payload)
         ctx.instrument_status = pset

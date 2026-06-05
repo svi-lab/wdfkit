@@ -3,14 +3,9 @@
 
 from __future__ import annotations
 
-import warnings
 from datetime import datetime, timedelta, timezone
-from typing import TYPE_CHECKING
 
 import numpy as np
-
-if TYPE_CHECKING:
-    import xarray as xr
 
 
 def convert_time(t):
@@ -87,40 +82,3 @@ def pad_if_unfinished(arr, count, capacity, replace_value=None, extend=False):
             arr = np.concatenate([arr, replace_value])
 
     return arr
-
-
-def ensure_in_memory(
-    da: xr.DataArray,
-    caller: str,
-    reason: str,
-    stacklevel: int = 3,
-) -> xr.DataArray:
-    """If *da* is Dask-backed, emit a warning and compute it into RAM.
-
-    Parameters
-    ----------
-    da
-        Input DataArray, possibly Dask-backed.
-    caller
-        Short description of the calling context used in the warning
-        (e.g. ``"CosmicRayRemover"``).
-    reason
-        One sentence explaining why the full array is needed.
-    stacklevel
-        Passed to :func:`warnings.warn`.
-
-    Returns
-    -------
-    A NumPy-backed DataArray; returned unchanged if already in memory.
-    """
-    if da.chunks is not None:
-        size_gb = da.nbytes / 2**30
-        warnings.warn(
-            f"{caller} received a Dask-backed DataArray "
-            f"(shape {tuple(da.shape)}, ~{size_gb:.2f} GB). "
-            f"{reason} Computing the full array into RAM now.",
-            UserWarning,
-            stacklevel=stacklevel,
-        )
-        return da.compute()
-    return da

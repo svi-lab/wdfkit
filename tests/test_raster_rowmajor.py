@@ -25,18 +25,15 @@ def test_classify_raster_rowmajor(fname, ny, nx):
 @pytest.mark.parametrize("fname,ny,nx", _FILES)
 def test_shape_and_dims(fname, ny, nx):
     da = wdfkit.read(TEST_DATA / fname)
-    assert da.dims[-1] in (
-        "raman_shift",
-        "wavelength_nm",
-    ), f"Bad spectral dim: {da.dims[-1]}"
-    assert da.dims[:2] == ("y", "x"), f"Got {da.dims}"
+    assert da.dims[-1] == "spectral", f"Bad spectral dim: {da.dims[-1]}"
+    assert da.dims[:2] == ("row", "column"), f"Got {da.dims}"
     assert da.shape[:2] == (ny, nx)
 
 
 @pytest.mark.parametrize("fname,ny,nx", _FILES)
 def test_spectral_axis_last(fname, ny, nx):
     da = wdfkit.read(TEST_DATA / fname)
-    assert da.dims[-1] in ("raman_shift", "wavelength_nm")
+    assert da.dims[-1] == "spectral"
 
 
 def test_orgn_x_constant_within_rows():
@@ -68,8 +65,11 @@ def test_xy_coords_are_1d(
     fname="SiWafer_MapImageAcquisition_rectangleFilledRaster.wdf",
 ):
     da = wdfkit.read(TEST_DATA / fname)
-    assert da["x"].ndim == 1
-    assert da["y"].ndim == 1
+    assert da["column"].ndim == 1
+    assert da["row"].ndim == 1
+    assert da.attrs["data_type"] == "grid"
+    assert da.attrs["row_axis"] == "y"
+    assert da.attrs["column_axis"] == "x"
 
 
 def test_kind_attr():

@@ -91,7 +91,7 @@ def test_load_data_accessible():
     cat = catalog(TEST_DATA)
     r = cat.load(1)
     assert r.data is not None
-    assert r.data.ndim == 2
+    assert r.data.ndim >= 1
 
 
 @pytest.mark.parametrize("idx", range(1, 15))

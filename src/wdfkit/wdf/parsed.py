@@ -18,7 +18,9 @@ class XLSTInfo:
     values: np.ndarray
     data_type: str  # e.g. "Spectral"
     units: str  # e.g. "RamanShift"
-    dim_name: str  # resolved xarray dim name, e.g. "raman_shift"
+    dim_name: str
+    # physical spectral axis type,
+    # e.g. "raman_shift" (xarray dim is always "spectral")
     coord_units: str = (
         ""  # human-readable units for xarray coord attrs, e.g. "nm"
     )
@@ -64,7 +66,7 @@ class WMAPInfo:
     linefocus_size: int
 
 
-@dataclass
+@dataclass(frozen=True)
 class ParsedWDF:
     """Fully-decoded WDF file, ready for handler consumption.
 
@@ -98,7 +100,7 @@ class ParsedWDF:
     ]  # shape (nspectra, npoints); None for header-only
     xlst: XLSTInfo
     ylst: Optional[YLSTInfo]
-    orgn: list[OrgnEntry] = field(default_factory=list)
+    orgn: tuple[OrgnEntry, ...] = field(default_factory=tuple)
     wmap: Optional[WMAPInfo] = None
 
     # ---- extras ----

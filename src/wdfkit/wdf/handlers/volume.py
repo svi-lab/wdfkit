@@ -13,6 +13,9 @@ from ._attrs import make_attrs, sort_spectral, spectral_coord
 if TYPE_CHECKING:
     from ..parsed import ParsedWDF
 
+from ..types import MeasurementType
+from .base import ScanHandler
+
 
 def build_dataarray(parsed: "ParsedWDF") -> xr.DataArray:
     """Return a 4-D DataArray ``(z, y, x, spectral_dim)``.
@@ -61,3 +64,17 @@ def build_dataarray(parsed: "ParsedWDF") -> xr.DataArray:
             attrs=attrs,
         )
     )
+
+
+class VolumeHandler(ScanHandler):
+    kind = "volume"
+
+    def matches(self, parsed: "ParsedWDF") -> bool:
+        return (
+            parsed.measurement_type == MeasurementType.Map
+            and parsed.wmap is not None
+            and int(parsed.wmap.nsteps[2]) > 1
+        )
+
+    def build(self, parsed: "ParsedWDF") -> xr.DataArray:
+        return build_dataarray(parsed)

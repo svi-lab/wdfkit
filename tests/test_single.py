@@ -42,9 +42,10 @@ def test_spectral_axis_is_last_and_only(fname):
 
 def test_single_scan_si_shape_and_dim():
     da = wdfkit.read(TEST_DATA / "SiWafer_SingleScan.wdf")
-    assert da.dims == ("raman_shift",)
+    assert da.dims == ("spectral",)
     assert da.shape == (1015,)
     assert da.attrs["kind"] == "single"
+    assert da.attrs["data_type"] == "single"
 
 
 def test_single_scan_nspectra_1():

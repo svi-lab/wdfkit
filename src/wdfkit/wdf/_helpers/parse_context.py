@@ -6,6 +6,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import IO, Any, Optional
 
+from .block_index import BlockInfo
+
 
 @dataclass
 class ParseContext:
@@ -20,7 +22,7 @@ class ParseContext:
     params: dict = field(default_factory=dict)
     map_params: dict = field(default_factory=dict)
     coord_dict: dict = field(default_factory=dict)
-    blocks: dict = field(default_factory=dict)
+    blocks: list[BlockInfo] = field(default_factory=list)
     spectra: Any = None  # np.ndarray or dask.array set in DATA block
     npoints: int = 0
     nspectra: int = 0
@@ -57,8 +59,8 @@ class ParseContext:
 
     def print_block_header(self, name: str, index: int) -> None:
         if self.verbose:
+            block = self.blocks[index]
             print(
                 f"\n{' Block : ' + name + ' ':=^80s}\n"
-                f"size: {self.blocks['BlockSizes'][index]},"
-                f"offset: {self.blocks['BlockOffsets'][index]}"
+                f"size: {block.size}, offset: {block.offset}"
             )
