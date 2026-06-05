@@ -30,15 +30,17 @@
 .. |Tracking| image:: https://img.shields.io/badge/issue_tracking-github-blue
         :target: https://github.com/dshirya/wdfkit/issues
 
-.. image:: https://raw.githubusercontent.com/dshirya/wdfkit/main/docs/source/img/logo.png
-        :alt: wdfkit logo
-        :width: 600px
-        :align: center
+.. raw:: html
+
+   <div align="center">
+     <img src="https://raw.githubusercontent.com/dshirya/wdfkit/main/docs/source/img/logo.png"
+          alt="wdfkit logo" width="600px">
+   </div>
 
 About ``wdfkit``
 ----------------
 
-``wdfkit`` is a Python toolkit for **Renishaw WiRE** ``.wdf`` spectroscopy data—especially **Raman** and **photoluminescence** work. It helps you bring measurements out of the instrument format so you can explore and analyse them in Python: load single spectra, line scans, and maps; interpret wavelength or Raman-shift axes consistently; and prepare data with everyday steps such as **normalization**, **cosmic-ray spike removal**, reduction of **laser-related spectral artefacts**, and **noise suppression** for stacks of spectra.
+``wdfkit`` is a Python toolkit for **Renishaw WiRE** ``.wdf`` spectroscopy data—especially **Raman** and **photoluminescence** work. It reads single spectra, line scans, depth/time series, and raster maps into ``xarray.DataArray`` objects with consistent, predictable dimension names: the spectral axis is always ``"spectral"``; maps always use ``("row", "column", "spectral")``; series and point collections always use ``("point", "spectral")``. Spatial and temporal coordinates from the instrument's ORGN metadata are attached automatically.
 
 The project is **inspired by** `spectrapy <https://gitlab.in2p3.fr/dejan.skrelic/spectrapy>`__ by **Dejan Skrelic**—an earlier tool that shaped how spectroscopy users treat this kind of data.
 
