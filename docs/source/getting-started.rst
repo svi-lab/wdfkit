@@ -30,7 +30,7 @@ The quickest way to install is via pip::
     pip install wdfkit
 
 For a conda-based development setup, see the
-`README <https://github.com/dshirya/wdfkit#installation>`_.
+`README <https://github.com/svi-lab/wdfkit#installation>`_.
 
 Reading a ``.wdf`` file
 -----------------------

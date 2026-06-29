@@ -9,7 +9,7 @@ def main():
         description=(
             "Python package for WDF data treatment\n\n"
             "For more information, visit: "
-            "https://github.com/dshirya/wdfkit/"
+            "https://github.com/svi-lab/wdfkit/"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )

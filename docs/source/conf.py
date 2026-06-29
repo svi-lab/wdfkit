@@ -136,7 +136,7 @@ html_theme = "sphinx_rtd_theme"
 
 html_context = {
     "display_github": True,
-    "github_user": "dshirya",
+    "github_user": "svi-lab",
     "github_repo": "wdfkit",
     "github_version": "main",
     "conf_py_path": "/docs/source/",

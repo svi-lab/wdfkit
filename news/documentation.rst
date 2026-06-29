@@ -1,10 +1,10 @@
 **Added:**
 
-* Added error message for unknown MapAreaType flags in WMAP block.
+* <news item>
 
 **Changed:**
 
-* <news item>
+* Updated documentation for new structure.
 
 **Deprecated:**
 
