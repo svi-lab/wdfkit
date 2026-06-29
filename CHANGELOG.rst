@@ -4,68 +4,50 @@ Release notes
 
 .. current developments
 
-0.1.1
-=====
-
-**Added:**
-
-* Added ``SpectraSmoother`` support for 1-D single spectra.
-* Added "PCA" CosmicRayRemover for 3D spectra
-* Add ``CleanData`` class to detect oversaturated spectra (10+ consecutive zero channels) and automatically remove them from 2D/3D arrays; integrated as the first step in ``CosmicRayRemover`` and ``SpectraCleaner``.
-* Add zero-saturation detection to ``CosmicRayRemover`` via ``_zero_saturation_mask``, flagging ADC-clipped channels before positive-spike removal.
-* Add reading of InitialCoordinates for 2D files.
-* Added ``CosmicRayRemover`` support for 1-D single spectra.
-* Add initial coordinate for 1D WDF files.
-
-**Changed:**
-
-* Reorganize package internals into dedicated sub-packages; the public API is unchanged.
-* Restrict top-level exports to ``WDFReader``, ``CosmicRayRemover``, ``SpectraCleaner``, and ``normalize``.
-* CHANGELOG.rst file updated.
-* Changed parameters set for CosmicRayRemover
-
-**Deprecated:**
-
-* ``wdfkit.preprocessing`` module; import ``normalize`` directly from ``wdfkit`` instead.
-
-**Fixed:**
-
-* Fixed a bug in the spectra smoother where the spectral dimension was not being preserved.
-* Fix ``CosmicRayRemover`` collection-engine repair to interpolate from the original spectrum's clean channels instead of the PCA reference, eliminating residual negative spikes.
-* Fix ``CosmicRayRemover`` collection engine to run a second detection pass on a reference rebuilt from clean data, improving sensitivity on heterogeneous maps.
-* Lower default ``spike_threshold`` in ``CosmicRayRemover`` from ``5.0`` to ``3.5`` to improve cosmic-ray detection on typical spectra.
-
-
 0.1.0
 =====
 
 **Added:**
 
-* Add optional ``chunks`` on ``WDFReader`` for lazy, Dask-backed map reads with Y-row-aligned targets and a RAM guard before the ``DATA`` block.
-* Add ``wdfkit.read`` and header-only ``wdfkit.classify`` on the public API.
-* Add a ``wdf/`` layout with per-scan-kind handlers, ``ParsedWDF``, and typed enums/constants for parsing and dispatch.
-* Add ``CosmicRayRemover`` support for 2-D inputs and an iterative ``max_passes`` (default ``3``).
-* Expose ``ExposureTime`` and ``LaserPower`` from ``WXDM`` / ``WXIS`` as ``DataArray`` attributes where applicable.
-* Ship ``py.typed`` and extend type annotations on the read/assembly surface.
+* ``catalog()``: fast, header-only directory scan that builds a metadata
+  table over a collection of ``.wdf`` files without loading spectra.
+* ``wdfkit.read`` and header-only ``wdfkit.classify`` on the public API.
+* ``wdf/`` package layout with per-scan-kind handlers (``single``,
+  ``series``, ``points``, ``line_xy``, ``raster_rowmajor``,
+  ``raster_columnmajor``, ``raster_snake``, ``linefocus``, ``volume``), a
+  typed ``ParsedWDF``, and enum-backed block parsing.
+* ``data_type`` (``"single"`` / ``"sequence"`` / ``"grid"``) and ``kind``
+  attrs on every produced ``DataArray``; ``row_axis`` / ``column_axis``
+  attrs on grid (map) arrays recording which physical stage axis each
+  dimension represents.
+* ``time`` coordinate (seconds elapsed) on sequence and grid DataArrays
+  when an ORGN Time entry is present.
+* Optional ``chunks`` on ``WDFReader`` for lazy, Dask-backed map reads.
+* ``comment`` and per-scan acquisition settings (``exposure_time``,
+  ``laser_power``) added to ``DataArray.attrs`` where available.
+* Descriptive error, listing known flag bits, for unsupported/unknown
+  ``MapAreaType`` flags in the WMAP block.
+* Documentation rewritten to describe the current ``DataArray`` layout
+  (``data_type``/``kind``/dimension conventions) and the ``catalog``
+  function.
 
 **Changed:**
 
-* Make ``normalize``, ``CosmicRayRemover``, and ``SpectraCleaner`` Dask-aware with lazy paths or warnings when full materialisation is needed.
-* Unify ``WDFReader``, ``wdfkit.read``, and ``read_wdf_file`` on one handler-based code path; fold the former top-level ``internal/``, ``spectral/`` package tree, and related modules into ``wdf/`` (public ``from wdfkit.spectral import SpectralAxisSpec`` unchanged).
-* Return map dimensions as ``x`` / ``y`` (was ``X`` / ``Y``), single scans as 1-D spectral arrays, and sort the spectral coordinate ascending for all kinds.
-* Tidy ``attrs`` (CamelCase only), use linear interpolation and slight mask dilation for 1-D cosmic-ray repair, and refresh docs and branding.
+* Standardized the spectral dimension name to ``"spectral"`` across all
+  scan kinds; grid (map) DataArrays use ``("row", "column", "spectral")``,
+  sequence/point DataArrays use ``("point", "spectral")``.
+* Cleaned ``DataArray.attrs`` down to scientifically relevant, snake_case
+  keys (e.g. ``n_spectra``, ``n_points``, ``spectral_units``,
+  ``start_time``, ``end_time``); internal parser-only fields are no longer
+  exposed.
+* ``start_time`` / ``end_time`` attrs, and the matching ``catalog()``
+  columns, are formatted as ``YYYY-MM-DD HH:MM:SS`` strings.
 
 **Fixed:**
 
-* Fix chunked-map reads that hit Dask ``nd`` fancy-index failures during ``sortby`` assembly.
-* Fix the installed ``wdfkit`` CLI entry point (``ModuleNotFoundError`` under the previous target).
-* Fix a file-pointer bug in ``origin.py`` for certain dtypes, preserve exception chaining on missing files in ``io.py``, and confine truncated-image PIL settings to parsing so import has no global side effect.
-* Gate noisy YLST debug output behind verbose mode.
-* Raise ``ValueError`` for unknown ``normalize`` methods instead of returning silently; replace coordinate ``assert`` checks with explicit errors.
-
-**Removed:**
-
-* Remove the old ``wdf/assemble.py``-centric layout, duplicate package roots absorbed into ``wdf/``, and a few obsolete test helpers.
+* Fixed file-cursor corruption in the ORGN parser for arbitrary-type
+  entries, which could misalign all subsequent ORGN reads.
+* Removed a duplicate ``XlistLength`` key written by the WDF1 block parser.
 
 
 0.0.1

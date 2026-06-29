@@ -24,13 +24,13 @@ Authors
 ``wdfkit`` is developed by Danila Shiryaev with help and assistance from
 Dejan Skrelic. The project is maintained by Danila Shiryaev. For a detailed
 list of contributors see
-https://github.com/dshirya/wdfkit/graphs/contributors.
+https://github.com/svi-lab/wdfkit/graphs/contributors.
 
 ============
 Installation
 ============
 
-See the `README <https://github.com/dshirya/wdfkit#installation>`_
+See the `README <https://github.com/svi-lab/wdfkit#installation>`_
 file included with the distribution.
 
 ================

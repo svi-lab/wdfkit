@@ -2,7 +2,7 @@
 ========
 
 .. |title| replace:: wdfkit
-.. _title: https://dshirya.github.io/wdfkit
+.. _title: https://svi-lab.github.io/wdfkit
 
 |PyPI| |Forge| |PythonVersion| |PR|
 
@@ -12,14 +12,14 @@
 .. |Black| image:: https://img.shields.io/badge/code_style-black-black
         :target: https://github.com/psf/black
 
-.. |Codecov| image:: https://codecov.io/gh/dshirya/wdfkit/branch/main/graph/badge.svg
-        :target: https://codecov.io/gh/dshirya/wdfkit
+.. |Codecov| image:: https://codecov.io/gh/svi-lab/wdfkit/branch/main/graph/badge.svg
+        :target: https://codecov.io/gh/svi-lab/wdfkit
 
 .. |Forge| image:: https://img.shields.io/conda/vn/conda-forge/wdfkit
         :target: https://anaconda.org/conda-forge/wdfkit
 
 .. |PR| image:: https://img.shields.io/badge/PR-Welcome-29ab47ff
-        :target: https://github.com/dshirya/wdfkit/pulls
+        :target: https://github.com/svi-lab/wdfkit/pulls
 
 .. |PyPI| image:: https://img.shields.io/pypi/v/wdfkit
         :target: https://pypi.org/project/wdfkit/
@@ -28,12 +28,12 @@
         :target: https://pypi.org/project/wdfkit/
 
 .. |Tracking| image:: https://img.shields.io/badge/issue_tracking-github-blue
-        :target: https://github.com/dshirya/wdfkit/issues
+        :target: https://github.com/svi-lab/wdfkit/issues
 
 .. raw:: html
 
    <div align="center">
-     <img src="https://raw.githubusercontent.com/dshirya/wdfkit/main/docs/source/img/logo.png"
+     <img src="https://raw.githubusercontent.com/svi-lab/wdfkit/main/docs/source/img/logo.png"
           alt="wdfkit logo" width="600px">
    </div>
 
@@ -44,14 +44,14 @@ About ``wdfkit``
 
 The project is **inspired by** `spectrapy <https://gitlab.in2p3.fr/dejan.skrelic/spectrapy>`__ by **Dejan Skrelic**—an earlier tool that shaped how spectroscopy users treat this kind of data.
 
-For more information about the wdfkit library, please consult our `online documentation <https://dshirya.github.io/wdfkit>`_.
+For more information about the wdfkit library, please consult our `online documentation <https://svi-lab.github.io/wdfkit>`_.
 
 Citation
 --------
 
 If you use wdfkit in a scientific publication, we would like you to cite this package as
 
-        wdfkit Package, https://github.com/dshirya/wdfkit
+        wdfkit Package, https://github.com/svi-lab/wdfkit
 
 Installation
 ------------
@@ -79,7 +79,7 @@ To install using ``pip`` into your ``wdfkit_env`` environment, type ::
         pip install wdfkit
 
 If you prefer to install from sources, after installing the dependencies, obtain the source archive from
-`GitHub <https://github.com/dshirya/wdfkit/>`_. Once installed, ``cd`` into your ``wdfkit`` directory
+`GitHub <https://github.com/svi-lab/wdfkit/>`_. Once installed, ``cd`` into your ``wdfkit`` directory
 and run the following ::
 
         pip install .
@@ -100,12 +100,12 @@ To view the basic usage and available commands, type ::
 Getting Started
 ---------------
 
-You may consult our `online documentation <https://dshirya.github.io/wdfkit>`_ for tutorials and API references.
+You may consult our `online documentation <https://svi-lab.github.io/wdfkit>`_ for tutorials and API references.
 
 Support and Contribute
 ----------------------
 
-If you see a bug or want to request a feature, please `report it as an issue <https://github.com/dshirya/wdfkit/issues>`_ and/or `submit a fix as a PR <https://github.com/dshirya/wdfkit/pulls>`_.
+If you see a bug or want to request a feature, please `report it as an issue <https://github.com/svi-lab/wdfkit/issues>`_ and/or `submit a fix as a PR <https://github.com/svi-lab/wdfkit/pulls>`_.
 
 Feel free to fork the project and contribute. To install wdfkit
 in a development mode, with its sources being directly used by Python
@@ -128,7 +128,7 @@ trying to commit again.
 
 Improvements and fixes are always appreciated.
 
-Before contributing, please read our `Code of Conduct <https://github.com/dshirya/wdfkit/blob/main/CODE-OF-CONDUCT.rst>`_.
+Before contributing, please read our `Code of Conduct <https://github.com/svi-lab/wdfkit/blob/main/CODE-OF-CONDUCT.rst>`_.
 
 Contact
 -------

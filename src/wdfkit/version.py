@@ -7,7 +7,7 @@
 # File coded by: Danila Shiryaev.
 #
 # See GitHub contributions for a more detailed list of contributors.
-# https://github.com/dshirya/wdfkit/graphs/contributors  # noqa: E501
+# https://github.com/svi-lab/wdfkit/graphs/contributors  # noqa: E501
 #
 # See LICENSE.rst for license information.
 #

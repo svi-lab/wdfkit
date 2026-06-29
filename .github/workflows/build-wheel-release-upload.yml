@@ -28,7 +28,7 @@ jobs:
     with:
       project: wdfkit
       c_extension: false
-      maintainer_github_username: dshirya
+      maintainer_github_username: svi-lab
     secrets:
       PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
       PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
@@ -49,7 +49,7 @@ jobs:
   #   with:
   #     project: wdfkit
   #     c_extension: false
-  #     maintainer_github_username: dshirya
+  #     maintainer_github_username: svi-lab
   #   secrets:
   #     PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
 
@@ -71,6 +71,6 @@ jobs:
   #   uses: scikit-package/release-scripts/.github/workflows/_build-release-github-private-pure.yml@v0
   #   with:
   #     project: wdfkit
-  #     maintainer_github_username: dshirya
+  #     maintainer_github_username: svi-lab
   #   secrets:
   #     PAT_TOKEN: ${{ secrets.PAT_TOKEN }}

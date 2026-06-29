@@ -44,7 +44,7 @@ def parse_wmap(ctx: ParseContext) -> None:
                 f"(unknown bits: 0x{unknown_bits:02X}). "
                 f"Known flag bits: {known}. "
                 "Please open an issue at "
-                "https://github.com/dshirya/wdfkit/issues "
+                "https://github.com/svi-lab/wdfkit/issues "
                 "and attach the .wdf file."
             )
         # Store a human-readable name for exact single-flag matches; otherwise
