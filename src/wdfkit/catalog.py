@@ -85,7 +85,7 @@ def catalog(
     """
     from .wdf.io import parse_wdf_header
 
-    root = Path(directory)
+    root = Path(directory).expanduser()
     pattern = "**/*.wdf" if recursive else "*.wdf"
     paths = sorted(root.glob(pattern))
 
