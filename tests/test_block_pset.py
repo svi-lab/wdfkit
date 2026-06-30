@@ -1,5 +1,6 @@
 """Tests for the PSET blocks: WXDA, WXDM, WXIS, WXCS, ZLDC (§10)."""
 
+import datetime
 from pathlib import Path
 
 import pytest
@@ -64,3 +65,18 @@ def test_pset_walk():
         assert isinstance(path, str)
         assert isinstance(label, str)
         assert isinstance(tag, str)
+
+
+@pytest.mark.parametrize("fname", ALL_FIXTURES)
+def test_acquisition_time_is_datetime(fname):
+    r = WDFReader(TEST_DATA / fname)
+    assert isinstance(r.acquisition_time, datetime.datetime)
+
+
+@pytest.mark.parametrize("fname", ALL_FIXTURES)
+def test_motor_positions_accessible(fname):
+    # None of the current fixtures carry WXIS motor entries, so this only
+    # pins that the property doesn't raise; add a fixture with motor data
+    # to extend this into a positive-value check.
+    r = WDFReader(TEST_DATA / fname)
+    assert r.motor_positions is None or isinstance(r.motor_positions, dict)

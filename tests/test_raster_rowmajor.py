@@ -12,7 +12,7 @@ from wdfkit.wdf.io import parse_wdf_to_parsed
 _FILES = [
     ("SiWafer_MapImageAcquisition_rectangleFilledRaster.wdf", 9, 11),
     ("SiWafer_StreamHR_ImageAcquisition_rectangleFilled.wdf", 7, 10),
-    ("test_map.wdf", 17, 25),
+    ("Glass_MapImageAquisition_rectangleFilledRaster_PL.wdf", 5, 8),
 ]
 
 
@@ -79,13 +79,16 @@ def test_kind_attr():
     assert da.attrs["kind"] == "raster_rowmajor"
 
 
-def test_golden_sha256_test_map():
-    """Verify test_map.wdf data bytes match the original implementation."""
+def test_golden_sha256_map_pl():
+    """Verify Glass_MapImageAquisition_rectangleFilledRaster_PL.wdf data
+    bytes match the original implementation."""
     import hashlib
 
-    da = wdfkit.read(TEST_DATA / "test_map.wdf")
+    da = wdfkit.read(
+        TEST_DATA / "Glass_MapImageAquisition_rectangleFilledRaster_PL.wdf"
+    )
     sha = hashlib.sha256(np.ascontiguousarray(da.values).tobytes()).hexdigest()
     assert (
         sha
-        == "3b389ea645ecc6f712147b264d607800598bc76354cff6a28b558c08b06c25a9"
+        == "bc04a4ab8e9c46482b8e70e67cf4759412a1012d28d940398487b0f89084381f"
     )

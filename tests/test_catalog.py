@@ -3,7 +3,6 @@
 from pathlib import Path
 
 import pandas as pd
-import pytest
 
 from wdfkit import WDFReader, catalog
 from wdfkit.catalog import Catalog
@@ -94,8 +93,8 @@ def test_load_data_accessible():
     assert r.data.ndim >= 1
 
 
-@pytest.mark.parametrize("idx", range(1, 15))
-def test_load_all_fixtures(idx):
+def test_load_all_fixtures():
     cat = catalog(TEST_DATA)
-    r = cat.load(idx)
-    assert r.data is not None
+    for idx in range(1, len(cat) + 1):
+        r = cat.load(idx)
+        assert r.data is not None
