@@ -11,7 +11,7 @@ from wdfkit.wdf.io import parse_wdf_to_parsed
 
 _FILES = [
     "SiWafer_SingleScan.wdf",
-    "test.wdf",
+    "Glass_SingleScan_PL.wdf",
 ]
 
 

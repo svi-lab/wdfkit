@@ -21,11 +21,11 @@ TEST_DATA = Path(__file__).resolve().parent / "test_data"
 
 # SHA256 of contiguous spectral ``values`` bytes — pins full arrays.
 _VALUES_SHA256 = {
-    "test.wdf": (
+    "Glass_SingleScan_PL.wdf": (
         "1121d8054198265a1c476ebf662816edb7714a8c163f774b0e3457ba3e46ec65"
     ),
-    "test_map.wdf": (
-        "3b389ea645ecc6f712147b264d607800598bc76354cff6a28b558c08b06c25a9"
+    "Glass_MapImageAquisition_rectangleFilledRaster_PL.wdf": (
+        "bc04a4ab8e9c46482b8e70e67cf4759412a1012d28d940398487b0f89084381f"
     ),
 }
 
@@ -35,7 +35,7 @@ def _sha256_values(arr: np.ndarray) -> str:
 
 
 def test_read_wdf_single_scan_matches_golden():
-    path = TEST_DATA / "test.wdf"
+    path = TEST_DATA / "Glass_SingleScan_PL.wdf"
     da, img = WDFReader(path)
 
     # New shape: single → 1-D ("spectral",)
@@ -59,34 +59,41 @@ def test_read_wdf_single_scan_matches_golden():
         da.values[-3:], [17035.36328125, 17592.48242188, 17531.3671875]
     )
 
-    assert _sha256_values(da.values) == _VALUES_SHA256["test.wdf"]
+    assert (
+        _sha256_values(da.values) == _VALUES_SHA256["Glass_SingleScan_PL.wdf"]
+    )
 
 
 def test_read_wdf_map_matches_golden():
-    path = TEST_DATA / "test_map.wdf"
+    path = TEST_DATA / "Glass_MapImageAquisition_rectangleFilledRaster_PL.wdf"
     da, img = WDFReader(path)
 
     # New shape: raster_rowmajor → ("row", "column", "spectral")
-    assert dict(da.sizes) == {"row": 17, "column": 25, "spectral": 9341}
+    assert dict(da.sizes) == {"row": 5, "column": 8, "spectral": 9341}
     assert da.attrs["measurement_type"] == "Map"
-    assert da.attrs["n_spectra"] == 425
+    assert da.attrs["n_spectra"] == 40
     assert da.attrs["n_points"] == 9341
-    assert da.attrs["shape"] == (17, 25)
-    assert da.attrs["file_size"] == "16.2MB"
+    assert da.attrs["shape"] == (5, 8)
+    assert da.attrs["file_size"] == "2.0MB"
     assert da.attrs["kind"] == "raster_rowmajor"
     assert img is not None
     assert getattr(img, "mode") == "RGB"
 
     corner = da.values[0, 0, :3]
     np.testing.assert_allclose(
-        corner, [668.75933838, 673.73608398, 695.56280518]
+        corner, [269.42822266, 274.30685425, 293.62857056]
     )
     np.testing.assert_allclose(
         da.values[0, 0, -3:],
-        [12142.55175781, 12009.16113281, 12445.69824219],
+        [11282.70898438, 11546.43066406, 11590.08398438],
     )
 
-    assert _sha256_values(da.values) == _VALUES_SHA256["test_map.wdf"]
+    assert (
+        _sha256_values(da.values)
+        == _VALUES_SHA256[
+            "Glass_MapImageAquisition_rectangleFilledRaster_PL.wdf"
+        ]
+    )
 
 
 def test_read_wdf_missing_file_raises():
@@ -96,7 +103,7 @@ def test_read_wdf_missing_file_raises():
 
 def test_wdf_reader_idempotent_same_file():
     """Two reads of the same path yield identical spectral cubes."""
-    path = TEST_DATA / "test.wdf"
+    path = TEST_DATA / "Glass_SingleScan_PL.wdf"
     da_a, _ = WDFReader(path)
     da_b, _ = WDFReader(path)
     np.testing.assert_array_equal(da_a.values, da_b.values)
@@ -104,8 +111,10 @@ def test_wdf_reader_idempotent_same_file():
 
 def test_data_type_attrs():
     """Every DataArray has a data_type attr describing its format."""
-    path_single = TEST_DATA / "test.wdf"
-    path_map = TEST_DATA / "test_map.wdf"
+    path_single = TEST_DATA / "Glass_SingleScan_PL.wdf"
+    path_map = (
+        TEST_DATA / "Glass_MapImageAquisition_rectangleFilledRaster_PL.wdf"
+    )
     da_s, _ = WDFReader(path_single)
     da_m, _ = WDFReader(path_map)
     assert da_s.attrs["data_type"] == "single"
@@ -113,14 +122,14 @@ def test_data_type_attrs():
 
 
 def test_module_level_read_returns_dataarray():
-    path = TEST_DATA / "test.wdf"
+    path = TEST_DATA / "Glass_SingleScan_PL.wdf"
     da = read(path)
     assert dict(da.sizes) == {"spectral": 9341}
 
 
 def test_exposure_time_and_laser_power_single_scan():
     """ExposureTime and LaserPower are read from WXDM/WXIS blocks."""
-    path = TEST_DATA / "test.wdf"
+    path = TEST_DATA / "Glass_SingleScan_PL.wdf"
     da, _ = WDFReader(path)
 
     assert "exposure_time" in da.attrs
@@ -132,7 +141,7 @@ def test_exposure_time_and_laser_power_single_scan():
 
 def test_exposure_time_and_laser_power_map():
     """exposure_time and laser_power are read correctly for 2-D map data."""
-    path = TEST_DATA / "test_map.wdf"
+    path = TEST_DATA / "Glass_MapImageAquisition_rectangleFilledRaster_PL.wdf"
     da, _ = WDFReader(path)
 
     assert "exposure_time" in da.attrs
