@@ -9,7 +9,7 @@ OPEN SOURCE LICENSE AGREEMENT
 =============================
 BSD 3-Clause License
 
-Copyright (c) 2026, Ecole Polytechnique Palaiseau.
+Copyright (c) 2026, SVI - Saint Gobain Innovation Hub Europe.
 All Rights Reserved.
 
 Redistribution and use in source and binary forms, with or without

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 ##############################################################################
 #
-# (c) 2026 Ecole Polytechnique Palaiseau.
+# (c) 2026 SVI - Saint Gobain Innovation Hub Europe.
 # All rights reserved.
 #
 # File coded by: Danila Shiryaev.

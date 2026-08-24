@@ -69,7 +69,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "wdfkit"
-copyright = "%Y, Ecole Polytechnique Palaiseau"
+copyright = "%Y, SVI - Saint Gobain Innovation Hub Europe"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
