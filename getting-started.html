@@ -1,0 +1,251 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting started &mdash; wdfkit 0.1.0rc0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=9205c5d6"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=cca77546"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="wdfkit package" href="api/wdfkit.html" />
+    <link rel="prev" title="wdfkit documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            wdfkit
+              <img src="_static/logo-no-background.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reading-a-wdf-file">Reading a <code class="docutils literal notranslate"><span class="pre">.wdf</span></code> file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dataarray-format">DataArray format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bulk-loading-and-the-catalog">Bulk loading and the catalog</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/wdfkit.html">Package API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">wdfkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Getting started</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/svi-lab/wdfkit/blob/main/docs/source/getting-started.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="getting-started">
+<span id="index-0"></span><span id="id1"></span><h1>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h1>
+<a class="reference internal image-reference" href="_images/logo.png"><img alt="wdfkit logo" class="align-center" src="_images/logo.png" style="width: 400px;" />
+</a>
+<p><code class="docutils literal notranslate"><span class="pre">wdfkit</span></code> reads Renishaw WiRE <code class="docutils literal notranslate"><span class="pre">.wdf</span></code> spectra into <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code>
+objects. It handles single spectra, line scans, depth/time series, and
+full raster maps—normalising dimension names and spectral axes so
+downstream analysis code can treat every file type the same way.</p>
+<p>The project is <strong>inspired by</strong> <a class="reference external" href="https://gitlab.in2p3.fr/dejan.skrelic/spectrapy">spectrapy</a>
+by <strong>Dejan Skrelic</strong>—an earlier tool that shaped how spectroscopy users treat
+this kind of data.</p>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
+<p>The quickest way to install is via pip:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">wdfkit</span>
+</pre></div>
+</div>
+<p>For a conda-based development setup, see the
+<a class="reference external" href="https://github.com/svi-lab/wdfkit#installation">README</a>.</p>
+</section>
+<section id="reading-a-wdf-file">
+<h2>Reading a <code class="docutils literal notranslate"><span class="pre">.wdf</span></code> file<a class="headerlink" href="#reading-a-wdf-file" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="api/wdfkit.html#wdfkit.WDFReader" title="wdfkit.WDFReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">WDFReader</span></code></a> loads the file and returns an
+<code class="docutils literal notranslate"><span class="pre">(xr.DataArray,</span> <span class="pre">image_or_None)</span></code> pair. It can be unpacked directly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">wdfkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">WDFReader</span>
+
+<span class="n">data</span><span class="p">,</span> <span class="n">image</span> <span class="o">=</span> <span class="n">WDFReader</span><span class="p">(</span><span class="s2">"measurement.wdf"</span><span class="p">)</span>
+
+<span class="c1"># or keep as an object</span>
+<span class="n">reader</span> <span class="o">=</span> <span class="n">WDFReader</span><span class="p">(</span><span class="s2">"measurement.wdf"</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">data</span>    <span class="c1"># xr.DataArray</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">image</span>  <span class="c1"># white-light image, or None</span>
+</pre></div>
+</div>
+<p>Optional keyword arguments include <code class="docutils literal notranslate"><span class="pre">spectral_dim</span></code> (selects the physical
+axis type stored as metadata), <code class="docutils literal notranslate"><span class="pre">chunks</span></code> (lazy/Dask chunking), <code class="docutils literal notranslate"><span class="pre">verbose</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">time_coord</span></code> — see the class docstring for details.</p>
+</section>
+<section id="dataarray-format">
+<h2>DataArray format<a class="headerlink" href="#dataarray-format" title="Link to this heading"></a></h2>
+<p>Every DataArray produced by <code class="docutils literal notranslate"><span class="pre">wdfkit</span></code> has a <code class="docutils literal notranslate"><span class="pre">data_type</span></code> attribute that
+identifies its canonical shape, and a <code class="docutils literal notranslate"><span class="pre">kind</span></code> attribute that names the
+exact acquisition mode.</p>
+<p>The <strong>spectral dimension is always called</strong> <code class="docutils literal notranslate"><span class="pre">&quot;spectral&quot;</span></code>. The spectral
+coordinate carries <code class="docutils literal notranslate"><span class="pre">units</span></code> and <code class="docutils literal notranslate"><span class="pre">long_name</span></code> attributes that describe the
+physical axis (e.g. <code class="docutils literal notranslate"><span class="pre">units=&quot;1/cm&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">long_name=&quot;RamanShift&quot;</span></code>).</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 25.0%" />
+<col style="width: 20.0%" />
+<col style="width: 35.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><code class="docutils literal notranslate"><span class="pre">data_type</span></code></p></th>
+<th class="head"><p>Dims</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">kind</span></code> values</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;single&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(&quot;spectral&quot;,)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">single</span></code></p></td>
+<td><p>One spectrum.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;sequence&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(&quot;point&quot;,</span> <span class="pre">&quot;spectral&quot;)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">points</span></code>, <code class="docutils literal notranslate"><span class="pre">line_xy</span></code>, <code class="docutils literal notranslate"><span class="pre">series</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">point</span></code> is a 0-based integer index. Spatial ORGN entries
+(<code class="docutils literal notranslate"><span class="pre">SpatialX/Y/Z</span></code>) appear as named coordinates on the point dim.
+A <code class="docutils literal notranslate"><span class="pre">time</span></code> coordinate is added when ORGN Time data are present.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;grid&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(&quot;row&quot;,</span> <span class="pre">&quot;column&quot;,</span> <span class="pre">&quot;spectral&quot;)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">raster_rowmajor</span></code>, <code class="docutils literal notranslate"><span class="pre">raster_columnmajor</span></code>, <code class="docutils literal notranslate"><span class="pre">raster_snake</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">row</span></code> = physical y-axis positions (µm), <code class="docutils literal notranslate"><span class="pre">column</span></code> = physical
+x-axis positions (µm). <code class="docutils literal notranslate"><span class="pre">row_axis=&quot;y&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">column_axis=&quot;x&quot;</span></code>
+attrs record the mapping. A <code class="docutils literal notranslate"><span class="pre">time</span></code> coordinate shaped
+<code class="docutils literal notranslate"><span class="pre">(row,</span> <span class="pre">column)</span></code> is added when ORGN Time data are present.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Example — inspecting a map:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">WDFReader</span><span class="p">(</span><span class="s2">"map.wdf"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">dims</span><span class="p">)</span>            <span class="c1"># ('row', 'column', 'spectral')</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">"data_type"</span><span class="p">])</span>  <span class="c1"># 'grid'</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"spectral"</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>   <span class="c1"># {'units': '1/cm', 'long_name': 'RamanShift'}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"row"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>       <span class="c1"># physical y positions in µm</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"column"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>    <span class="c1"># physical x positions in µm</span>
+</pre></div>
+</div>
+<p>Example — inspecting a depth series:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">WDFReader</span><span class="p">(</span><span class="s2">"depth_series.wdf"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">dims</span><span class="p">)</span>              <span class="c1"># ('point', 'spectral')</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">"data_type"</span><span class="p">])</span>    <span class="c1"># 'sequence'</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"z"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>           <span class="c1"># physical Z positions from ORGN</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"time"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>        <span class="c1"># elapsed time in seconds, if present</span>
+</pre></div>
+</div>
+</section>
+<section id="bulk-loading-and-the-catalog">
+<h2>Bulk loading and the catalog<a class="headerlink" href="#bulk-loading-and-the-catalog" title="Link to this heading"></a></h2>
+<p><a class="reference internal" href="api/wdfkit.html#wdfkit.read" title="wdfkit.read"><code class="xref py py-func docutils literal notranslate"><span class="pre">read()</span></code></a> loads the same data but returns <strong>only</strong> the
+<code class="docutils literal notranslate"><span class="pre">DataArray</span></code> (no white-light image):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">wdfkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">read</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="s2">"measurement.wdf"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="api/wdfkit.html#wdfkit.classify" title="wdfkit.classify"><code class="xref py py-func docutils literal notranslate"><span class="pre">classify()</span></code></a> returns a small summary dict (scan <code class="docutils literal notranslate"><span class="pre">kind</span></code>,
+counts, flags) <strong>without</strong> reading the spectral payload — useful for
+scripting over folders of <code class="docutils literal notranslate"><span class="pre">.wdf</span></code> files:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">wdfkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">classify</span>
+
+<span class="n">info</span> <span class="o">=</span> <span class="n">classify</span><span class="p">(</span><span class="s2">"measurement.wdf"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">"kind"</span><span class="p">])</span>   <span class="c1"># e.g. 'raster_rowmajor'</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="api/wdfkit.html#module-wdfkit.catalog" title="wdfkit.catalog"><code class="xref py py-func docutils literal notranslate"><span class="pre">catalog()</span></code></a> scans a directory and returns a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Catalog</span></code> object that lists every <code class="docutils literal notranslate"><span class="pre">.wdf</span></code> file and
+lets you load individual files by index:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">wdfkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">catalog</span>
+
+<span class="n">cat</span> <span class="o">=</span> <span class="n">catalog</span><span class="p">(</span><span class="s2">"./data/"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cat</span><span class="p">)</span>        <span class="c1"># table of all files with kind, shape, …</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="wdfkit documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api/wdfkit.html" class="btn btn-neutral float-right" title="wdfkit package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Ecole Polytechnique Palaiseau.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

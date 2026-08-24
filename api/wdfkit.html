@@ -1,0 +1,758 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>wdfkit package &mdash; wdfkit 0.1.0rc0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=9205c5d6"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=cca77546"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Release notes" href="../release.html" />
+    <link rel="prev" title="Getting started" href="../getting-started.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            wdfkit
+              <img src="../_static/logo-no-background.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Package API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#wdfkit.WDFReader"><code class="docutils literal notranslate"><span class="pre">WDFReader</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.acquisition"><code class="docutils literal notranslate"><span class="pre">WDFReader.acquisition</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.acquisition_time"><code class="docutils literal notranslate"><span class="pre">WDFReader.acquisition_time</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.app_name"><code class="docutils literal notranslate"><span class="pre">WDFReader.app_name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.app_version"><code class="docutils literal notranslate"><span class="pre">WDFReader.app_version</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.bkxl"><code class="docutils literal notranslate"><span class="pre">WDFReader.bkxl</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.calibration"><code class="docutils literal notranslate"><span class="pre">WDFReader.calibration</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.comment"><code class="docutils literal notranslate"><span class="pre">WDFReader.comment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.file_uuid"><code class="docutils literal notranslate"><span class="pre">WDFReader.file_uuid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.has_whitelight"><code class="docutils literal notranslate"><span class="pre">WDFReader.has_whitelight</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.initial_coordinates"><code class="docutils literal notranslate"><span class="pre">WDFReader.initial_coordinates</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.instrument_status"><code class="docutils literal notranslate"><span class="pre">WDFReader.instrument_status</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.measurement_type"><code class="docutils literal notranslate"><span class="pre">WDFReader.measurement_type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.motor_positions"><code class="docutils literal notranslate"><span class="pre">WDFReader.motor_positions</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.naccum"><code class="docutils literal notranslate"><span class="pre">WDFReader.naccum</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.ncollected"><code class="docutils literal notranslate"><span class="pre">WDFReader.ncollected</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.nspectra"><code class="docutils literal notranslate"><span class="pre">WDFReader.nspectra</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.orgn"><code class="docutils literal notranslate"><span class="pre">WDFReader.orgn</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.orgn_by_type"><code class="docutils literal notranslate"><span class="pre">WDFReader.orgn_by_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.raw_data"><code class="docutils literal notranslate"><span class="pre">WDFReader.raw_data</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.scan_type"><code class="docutils literal notranslate"><span class="pre">WDFReader.scan_type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.whtl_jpeg_bytes"><code class="docutils literal notranslate"><span class="pre">WDFReader.whtl_jpeg_bytes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.wmap"><code class="docutils literal notranslate"><span class="pre">WDFReader.wmap</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.xlist_length"><code class="docutils literal notranslate"><span class="pre">WDFReader.xlist_length</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.xlst"><code class="docutils literal notranslate"><span class="pre">WDFReader.xlst</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.ylist_length"><code class="docutils literal notranslate"><span class="pre">WDFReader.ylist_length</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.ylst"><code class="docutils literal notranslate"><span class="pre">WDFReader.ylst</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wdfkit.WDFReader.zeldac"><code class="docutils literal notranslate"><span class="pre">WDFReader.zeldac</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#wdfkit.catalog"><code class="docutils literal notranslate"><span class="pre">catalog()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wdfkit.classify"><code class="docutils literal notranslate"><span class="pre">classify()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wdfkit.read"><code class="docutils literal notranslate"><span class="pre">read()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-wdfkit.reader">wdfkit.reader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#wdfkit.reader.WDFReader"><code class="docutils literal notranslate"><span class="pre">WDFReader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wdfkit.reader.classify"><code class="docutils literal notranslate"><span class="pre">classify()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wdfkit.reader.read"><code class="docutils literal notranslate"><span class="pre">read()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-wdfkit.catalog">wdfkit.catalog</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#wdfkit.catalog.Catalog"><code class="docutils literal notranslate"><span class="pre">Catalog</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wdfkit.catalog.catalog"><code class="docutils literal notranslate"><span class="pre">catalog()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">wdfkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">wdfkit package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/svi-lab/wdfkit/blob/main/docs/source/api/wdfkit.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="title">
+<h1>wdfkit package<a class="headerlink" href="#title" title="Link to this heading"></a></h1>
+<p id="module-wdfkit">Python package for WDF data treatment.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="wdfkit.WDFReader">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">wdfkit.</span></span><span class="sig-name descname"><span class="pre">WDFReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.14)"><span class="pre">PathLike</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_coord</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'seconds_elapsed'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spectral_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.5)"><span class="pre">dtype</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'float64'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wdfkit/reader.html#WDFReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wdfkit.WDFReader" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Load and expose all parsed data from a Renishaw WiRE <code class="docutils literal notranslate"><span class="pre">.wdf</span></code> file.</p>
+<p>Typical usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data_array</span><span class="p">,</span> <span class="n">white_light_image</span> <span class="o">=</span> <span class="n">WDFReader</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After construction every block is accessible as a typed property.
+The xarray DataArray (shaped by scan type) is in <code class="docutils literal notranslate"><span class="pre">.data</span></code>; the PIL
+white-light image (if any) is in <code class="docutils literal notranslate"><span class="pre">.image</span></code>.  Both are also yielded
+by unpacking the reader directly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spectral_dim</strong> – Override for the spectral-axis dimension name.  <code class="docutils literal notranslate"><span class="pre">None</span></code> (default)
+auto-selects from the XLST units (e.g. <code class="docutils literal notranslate"><span class="pre">RamanShift</span></code> →
+<code class="docutils literal notranslate"><span class="pre">&quot;raman_shift&quot;</span></code>).</p></li>
+<li><p><strong>chunks</strong> – Dask lazy reading: <code class="docutils literal notranslate"><span class="pre">False</span></code> (default, eager NumPy), <code class="docutils literal notranslate"><span class="pre">True</span></code>
+(auto-chunk ~128 MB), or <code class="docutils literal notranslate"><span class="pre">int</span></code> (target MB per chunk).</p></li>
+<li><p><strong>dtype</strong> – In-memory dtype of the spectral data: <code class="docutils literal notranslate"><span class="pre">&quot;float64&quot;</span></code> (default) or
+<code class="docutils literal notranslate"><span class="pre">&quot;float32&quot;</span></code>.  The <code class="docutils literal notranslate"><span class="pre">.wdf</span></code> file stores float32 on disk, so
+<code class="docutils literal notranslate"><span class="pre">&quot;float32&quot;</span></code> halves memory use without losing precision.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.acquisition">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">acquisition</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">PSet</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.acquisition" title="Link to this definition"></a></dt>
+<dd><p>WXDA block parsed as a PSet (scan / acquisition properties).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.acquisition_time">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">acquisition_time</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.14)"><span class="pre">datetime</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.acquisition_time" title="Link to this definition"></a></dt>
+<dd><p>Acquisition start time decoded from the ORGN Time entry.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.app_name">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">app_name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.app_name" title="Link to this definition"></a></dt>
+<dd><p>WiRE application name string.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.app_version">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">app_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.app_version" title="Link to this definition"></a></dt>
+<dd><p>WiRE application version string.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.bkxl">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">bkxl</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">BKXLInfo</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.bkxl" title="Link to this definition"></a></dt>
+<dd><p>background X list (mirrored spectral axis).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>BKXL block</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.calibration">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">calibration</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">PSet</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.calibration" title="Link to this definition"></a></dt>
+<dd><p>WXCS block parsed as a PSet (calibration settings).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.comment">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">comment</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.comment" title="Link to this definition"></a></dt>
+<dd><p>Free-text comment from the TEXT block.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.file_uuid">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">file_uuid</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.file_uuid" title="Link to this definition"></a></dt>
+<dd><p>Unique file identifier from WDF1 header.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.has_whitelight">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">has_whitelight</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.has_whitelight" title="Link to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if a WHTL white-light image block is present.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.initial_coordinates">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">initial_coordinates</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.initial_coordinates" title="Link to this definition"></a></dt>
+<dd><p>Stage XYZ at acquisition time from WXIS.</p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">{&quot;x_um&quot;,</span> <span class="pre">&quot;y_um&quot;,</span> <span class="pre">&quot;z_um&quot;,</span> <span class="pre">&quot;x_str&quot;,</span> <span class="pre">&quot;y_str&quot;,</span> <span class="pre">&quot;z_str&quot;}</span></code>
+for every measurement type, including Single scans where ORGN
+carries no spatial origins.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.instrument_status">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">instrument_status</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">PSet</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.instrument_status" title="Link to this definition"></a></dt>
+<dd><p>WXIS block parsed as a PSet (motor positions, instrument state).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.measurement_type">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">measurement_type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.measurement_type" title="Link to this definition"></a></dt>
+<dd><p>Raw measurement type integer (1=Single, 2=Series, 3=Map).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.motor_positions">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">motor_positions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.motor_positions" title="Link to this definition"></a></dt>
+<dd><p>All motor positions from WXIS as <code class="docutils literal notranslate"><span class="pre">{label:</span> <span class="pre">(µm,</span> <span class="pre">string)}</span></code>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.naccum">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">naccum</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.naccum" title="Link to this definition"></a></dt>
+<dd><p>Accumulations per spectrum.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.ncollected">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ncollected</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.ncollected" title="Link to this definition"></a></dt>
+<dd><p>Actually collected number of spectra.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.nspectra">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">nspectra</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.nspectra" title="Link to this definition"></a></dt>
+<dd><p>Planned number of spectra (capacity).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.orgn">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">orgn</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><span class="pre">OrgnEntry</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#wdfkit.WDFReader.orgn" title="Link to this definition"></a></dt>
+<dd><p>Tuple of ORGN entries (spatial / time / flags per spectrum).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.orgn_by_type">
+<span class="sig-name descname"><span class="pre">orgn_by_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">OrgnEntry</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/wdfkit/reader.html#WDFReader.orgn_by_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wdfkit.WDFReader.orgn_by_type" title="Link to this definition"></a></dt>
+<dd><p>Return the first ORGN entry matching <em>data_type</em>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.raw_data">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">raw_data</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.raw_data" title="Link to this definition"></a></dt>
+<dd><p>Flat spectral array of shape (nspectra, xlist_length).</p>
+<p>Dtype follows the <code class="docutils literal notranslate"><span class="pre">dtype</span></code> argument given at construction
+(default float64).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.scan_type">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">scan_type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.scan_type" title="Link to this definition"></a></dt>
+<dd><p>Raw scan type integer.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.whtl_jpeg_bytes">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">whtl_jpeg_bytes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.14)"><span class="pre">bytes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.whtl_jpeg_bytes" title="Link to this definition"></a></dt>
+<dd><p>Raw JPEG bytes from the WHTL block, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if absent.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.wmap">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">wmap</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">WMAPInfo</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.wmap" title="Link to this definition"></a></dt>
+<dd><p>grid geometry. <code class="docutils literal notranslate"><span class="pre">None</span></code> if not a map scan.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>WMAP block</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.xlist_length">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">xlist_length</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.xlist_length" title="Link to this definition"></a></dt>
+<dd><p>Number of spectral channels per spectrum.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.xlst">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">xlst</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">XLSTInfo</span></span><a class="headerlink" href="#wdfkit.WDFReader.xlst" title="Link to this definition"></a></dt>
+<dd><p>spectral axis values, data_type, units, dim_name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>XLST block</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.ylist_length">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ylist_length</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.ylist_length" title="Link to this definition"></a></dt>
+<dd><p>Detector Y-axis length (1 for point detectors).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.ylst">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ylst</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">YLSTInfo</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.ylst" title="Link to this definition"></a></dt>
+<dd><p>detector-Y axis (None for point detectors).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>YLST block</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.WDFReader.zeldac">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">zeldac</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">PSet</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.WDFReader.zeldac" title="Link to this definition"></a></dt>
+<dd><p>ZLDC block parsed as a PSet (zero level &amp; dark current).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wdfkit.catalog">
+<span class="sig-prename descclassname"><span class="pre">wdfkit.</span></span><span class="sig-name descname"><span class="pre">catalog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.14)"><span class="pre">PathLike</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#wdfkit.catalog.Catalog" title="wdfkit.catalog.Catalog"><span class="pre">Catalog</span></a></span></span><a class="reference internal" href="../_modules/wdfkit/catalog.html#catalog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wdfkit.catalog" title="Link to this definition"></a></dt>
+<dd><p>Scan <em>directory</em> for <code class="docutils literal notranslate"><span class="pre">.wdf</span></code> files and return a <code class="xref py py-class docutils literal notranslate"><span class="pre">Catalog</span></code>.</p>
+<p>Uses header-only parsing (no spectra loaded) — fast even for large
+collections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> – Path to the directory to scan.</p></li>
+<li><p><strong>recursive</strong> – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, walk subdirectories recursively.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wdfkit.classify">
+<span class="sig-prename descclassname"><span class="pre">wdfkit.</span></span><span class="sig-name descname"><span class="pre">classify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.14)"><span class="pre">PathLike</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span></span><a class="reference internal" href="../_modules/wdfkit/reader.html#classify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wdfkit.classify" title="Link to this definition"></a></dt>
+<dd><p>Return scan classification for a WiRE <code class="docutils literal notranslate"><span class="pre">.wdf</span></code> file <em>without</em>
+loading the spectral data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Keys: <code class="docutils literal notranslate"><span class="pre">kind</span></code>, <code class="docutils literal notranslate"><span class="pre">measurement_type</span></code>, <code class="docutils literal notranslate"><span class="pre">scan_type</span></code>,
+<code class="docutils literal notranslate"><span class="pre">wmap_flag</span></code>, <code class="docutils literal notranslate"><span class="pre">nspectra</span></code>, <code class="docutils literal notranslate"><span class="pre">npoints</span></code>, <code class="docutils literal notranslate"><span class="pre">nsteps</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wdfkit.read">
+<span class="sig-prename descclassname"><span class="pre">wdfkit.</span></span><span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.14)"><span class="pre">PathLike</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_coord</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'seconds_elapsed'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spectral_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.5)"><span class="pre">dtype</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'float64'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2026.7.0)"><span class="pre">DataArray</span></a></span></span><a class="reference internal" href="../_modules/wdfkit/reader.html#read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wdfkit.read" title="Link to this definition"></a></dt>
+<dd><p>Read a WiRE <code class="docutils literal notranslate"><span class="pre">.wdf</span></code> file and return a <a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2026.7.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – Path to the <code class="docutils literal notranslate"><span class="pre">.wdf</span></code> file.</p></li>
+<li><p><strong>time_coord</strong> – Name for the elapsed-time coordinate on Series scans.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> disables it (absolute timestamps used instead).</p></li>
+<li><p><strong>spectral_dim</strong> – Override for the spectral-axis dimension name.</p></li>
+<li><p><strong>chunks</strong> – Dask chunking: <code class="docutils literal notranslate"><span class="pre">False</span></code> (eager), <code class="docutils literal notranslate"><span class="pre">True</span></code> (auto), or int (target MB).</p></li>
+<li><p><strong>dtype</strong> – In-memory dtype of the spectral data: <code class="docutils literal notranslate"><span class="pre">&quot;float64&quot;</span></code> (default) or
+<code class="docutils literal notranslate"><span class="pre">&quot;float32&quot;</span></code>.  The <code class="docutils literal notranslate"><span class="pre">.wdf</span></code> file stores float32 on disk, so
+<code class="docutils literal notranslate"><span class="pre">&quot;float32&quot;</span></code> halves memory use without losing precision.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Shape and dims depend on scan kind; spectral axis is always last.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2026.7.0)">xarray.DataArray</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+<section id="module-wdfkit.reader">
+<span id="wdfkit-reader"></span><h3>wdfkit.reader<a class="headerlink" href="#module-wdfkit.reader" title="Link to this heading"></a></h3>
+<p>Public <a class="reference internal" href="#wdfkit.reader.WDFReader" title="wdfkit.reader.WDFReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">WDFReader</span></code></a> API plus module-level <a class="reference internal" href="#wdfkit.reader.read" title="wdfkit.reader.read"><code class="xref py py-func docutils literal notranslate"><span class="pre">read()</span></code></a> and
+<a class="reference internal" href="#wdfkit.reader.classify" title="wdfkit.reader.classify"><code class="xref py py-func docutils literal notranslate"><span class="pre">classify()</span></code></a>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">wdfkit.reader.</span></span><span class="sig-name descname"><span class="pre">WDFReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.14)"><span class="pre">PathLike</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_coord</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'seconds_elapsed'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spectral_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.5)"><span class="pre">dtype</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'float64'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wdfkit/reader.html#WDFReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wdfkit.reader.WDFReader" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Load and expose all parsed data from a Renishaw WiRE <code class="docutils literal notranslate"><span class="pre">.wdf</span></code> file.</p>
+<p>Typical usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data_array</span><span class="p">,</span> <span class="n">white_light_image</span> <span class="o">=</span> <span class="n">WDFReader</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After construction every block is accessible as a typed property.
+The xarray DataArray (shaped by scan type) is in <code class="docutils literal notranslate"><span class="pre">.data</span></code>; the PIL
+white-light image (if any) is in <code class="docutils literal notranslate"><span class="pre">.image</span></code>.  Both are also yielded
+by unpacking the reader directly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spectral_dim</strong> – Override for the spectral-axis dimension name.  <code class="docutils literal notranslate"><span class="pre">None</span></code> (default)
+auto-selects from the XLST units (e.g. <code class="docutils literal notranslate"><span class="pre">RamanShift</span></code> →
+<code class="docutils literal notranslate"><span class="pre">&quot;raman_shift&quot;</span></code>).</p></li>
+<li><p><strong>chunks</strong> – Dask lazy reading: <code class="docutils literal notranslate"><span class="pre">False</span></code> (default, eager NumPy), <code class="docutils literal notranslate"><span class="pre">True</span></code>
+(auto-chunk ~128 MB), or <code class="docutils literal notranslate"><span class="pre">int</span></code> (target MB per chunk).</p></li>
+<li><p><strong>dtype</strong> – In-memory dtype of the spectral data: <code class="docutils literal notranslate"><span class="pre">&quot;float64&quot;</span></code> (default) or
+<code class="docutils literal notranslate"><span class="pre">&quot;float32&quot;</span></code>.  The <code class="docutils literal notranslate"><span class="pre">.wdf</span></code> file stores float32 on disk, so
+<code class="docutils literal notranslate"><span class="pre">&quot;float32&quot;</span></code> halves memory use without losing precision.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.acquisition">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">acquisition</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">PSet</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.acquisition" title="Link to this definition"></a></dt>
+<dd><p>WXDA block parsed as a PSet (scan / acquisition properties).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.acquisition_time">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">acquisition_time</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.14)"><span class="pre">datetime</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.acquisition_time" title="Link to this definition"></a></dt>
+<dd><p>Acquisition start time decoded from the ORGN Time entry.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.app_name">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">app_name</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.app_name" title="Link to this definition"></a></dt>
+<dd><p>WiRE application name string.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.app_version">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">app_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.app_version" title="Link to this definition"></a></dt>
+<dd><p>WiRE application version string.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.bkxl">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">bkxl</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">BKXLInfo</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.bkxl" title="Link to this definition"></a></dt>
+<dd><p>background X list (mirrored spectral axis).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>BKXL block</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.calibration">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">calibration</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">PSet</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.calibration" title="Link to this definition"></a></dt>
+<dd><p>WXCS block parsed as a PSet (calibration settings).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.comment">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">comment</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.comment" title="Link to this definition"></a></dt>
+<dd><p>Free-text comment from the TEXT block.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.file_uuid">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">file_uuid</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.file_uuid" title="Link to this definition"></a></dt>
+<dd><p>Unique file identifier from WDF1 header.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.has_whitelight">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">has_whitelight</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.has_whitelight" title="Link to this definition"></a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if a WHTL white-light image block is present.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.initial_coordinates">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">initial_coordinates</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.initial_coordinates" title="Link to this definition"></a></dt>
+<dd><p>Stage XYZ at acquisition time from WXIS.</p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">{&quot;x_um&quot;,</span> <span class="pre">&quot;y_um&quot;,</span> <span class="pre">&quot;z_um&quot;,</span> <span class="pre">&quot;x_str&quot;,</span> <span class="pre">&quot;y_str&quot;,</span> <span class="pre">&quot;z_str&quot;}</span></code>
+for every measurement type, including Single scans where ORGN
+carries no spatial origins.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.instrument_status">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">instrument_status</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">PSet</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.instrument_status" title="Link to this definition"></a></dt>
+<dd><p>WXIS block parsed as a PSet (motor positions, instrument state).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.measurement_type">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">measurement_type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.measurement_type" title="Link to this definition"></a></dt>
+<dd><p>Raw measurement type integer (1=Single, 2=Series, 3=Map).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.motor_positions">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">motor_positions</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.motor_positions" title="Link to this definition"></a></dt>
+<dd><p>All motor positions from WXIS as <code class="docutils literal notranslate"><span class="pre">{label:</span> <span class="pre">(µm,</span> <span class="pre">string)}</span></code>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.naccum">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">naccum</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.naccum" title="Link to this definition"></a></dt>
+<dd><p>Accumulations per spectrum.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.ncollected">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ncollected</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.ncollected" title="Link to this definition"></a></dt>
+<dd><p>Actually collected number of spectra.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.nspectra">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">nspectra</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.nspectra" title="Link to this definition"></a></dt>
+<dd><p>Planned number of spectra (capacity).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.orgn">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">orgn</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><span class="pre">OrgnEntry</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#wdfkit.reader.WDFReader.orgn" title="Link to this definition"></a></dt>
+<dd><p>Tuple of ORGN entries (spatial / time / flags per spectrum).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.orgn_by_type">
+<span class="sig-name descname"><span class="pre">orgn_by_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">OrgnEntry</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/wdfkit/reader.html#WDFReader.orgn_by_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wdfkit.reader.WDFReader.orgn_by_type" title="Link to this definition"></a></dt>
+<dd><p>Return the first ORGN entry matching <em>data_type</em>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.raw_data">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">raw_data</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.5)"><span class="pre">ndarray</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.raw_data" title="Link to this definition"></a></dt>
+<dd><p>Flat spectral array of shape (nspectra, xlist_length).</p>
+<p>Dtype follows the <code class="docutils literal notranslate"><span class="pre">dtype</span></code> argument given at construction
+(default float64).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.scan_type">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">scan_type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.scan_type" title="Link to this definition"></a></dt>
+<dd><p>Raw scan type integer.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.whtl_jpeg_bytes">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">whtl_jpeg_bytes</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.14)"><span class="pre">bytes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.whtl_jpeg_bytes" title="Link to this definition"></a></dt>
+<dd><p>Raw JPEG bytes from the WHTL block, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if absent.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.wmap">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">wmap</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">WMAPInfo</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.wmap" title="Link to this definition"></a></dt>
+<dd><p>grid geometry. <code class="docutils literal notranslate"><span class="pre">None</span></code> if not a map scan.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>WMAP block</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.xlist_length">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">xlist_length</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.xlist_length" title="Link to this definition"></a></dt>
+<dd><p>Number of spectral channels per spectrum.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.xlst">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">xlst</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">XLSTInfo</span></span><a class="headerlink" href="#wdfkit.reader.WDFReader.xlst" title="Link to this definition"></a></dt>
+<dd><p>spectral axis values, data_type, units, dim_name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>XLST block</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.ylist_length">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ylist_length</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.ylist_length" title="Link to this definition"></a></dt>
+<dd><p>Detector Y-axis length (1 for point detectors).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.ylst">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ylst</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">YLSTInfo</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.ylst" title="Link to this definition"></a></dt>
+<dd><p>detector-Y axis (None for point detectors).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>YLST block</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.reader.WDFReader.zeldac">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">zeldac</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">PSet</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#wdfkit.reader.WDFReader.zeldac" title="Link to this definition"></a></dt>
+<dd><p>ZLDC block parsed as a PSet (zero level &amp; dark current).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wdfkit.reader.classify">
+<span class="sig-prename descclassname"><span class="pre">wdfkit.reader.</span></span><span class="sig-name descname"><span class="pre">classify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.14)"><span class="pre">PathLike</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span></span><a class="reference internal" href="../_modules/wdfkit/reader.html#classify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wdfkit.reader.classify" title="Link to this definition"></a></dt>
+<dd><p>Return scan classification for a WiRE <code class="docutils literal notranslate"><span class="pre">.wdf</span></code> file <em>without</em>
+loading the spectral data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Keys: <code class="docutils literal notranslate"><span class="pre">kind</span></code>, <code class="docutils literal notranslate"><span class="pre">measurement_type</span></code>, <code class="docutils literal notranslate"><span class="pre">scan_type</span></code>,
+<code class="docutils literal notranslate"><span class="pre">wmap_flag</span></code>, <code class="docutils literal notranslate"><span class="pre">nspectra</span></code>, <code class="docutils literal notranslate"><span class="pre">npoints</span></code>, <code class="docutils literal notranslate"><span class="pre">nsteps</span></code>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)">dict</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wdfkit.reader.read">
+<span class="sig-prename descclassname"><span class="pre">wdfkit.reader.</span></span><span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.14)"><span class="pre">PathLike</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_coord</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'seconds_elapsed'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spectral_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v2.5)"><span class="pre">dtype</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'float64'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2026.7.0)"><span class="pre">DataArray</span></a></span></span><a class="reference internal" href="../_modules/wdfkit/reader.html#read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wdfkit.reader.read" title="Link to this definition"></a></dt>
+<dd><p>Read a WiRE <code class="docutils literal notranslate"><span class="pre">.wdf</span></code> file and return a <a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2026.7.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – Path to the <code class="docutils literal notranslate"><span class="pre">.wdf</span></code> file.</p></li>
+<li><p><strong>time_coord</strong> – Name for the elapsed-time coordinate on Series scans.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> disables it (absolute timestamps used instead).</p></li>
+<li><p><strong>spectral_dim</strong> – Override for the spectral-axis dimension name.</p></li>
+<li><p><strong>chunks</strong> – Dask chunking: <code class="docutils literal notranslate"><span class="pre">False</span></code> (eager), <code class="docutils literal notranslate"><span class="pre">True</span></code> (auto), or int (target MB).</p></li>
+<li><p><strong>dtype</strong> – In-memory dtype of the spectral data: <code class="docutils literal notranslate"><span class="pre">&quot;float64&quot;</span></code> (default) or
+<code class="docutils literal notranslate"><span class="pre">&quot;float32&quot;</span></code>.  The <code class="docutils literal notranslate"><span class="pre">.wdf</span></code> file stores float32 on disk, so
+<code class="docutils literal notranslate"><span class="pre">&quot;float32&quot;</span></code> halves memory use without losing precision.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Shape and dims depend on scan kind; spectral axis is always last.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.html#xarray.DataArray" title="(in xarray v2026.7.0)">xarray.DataArray</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-wdfkit.catalog">
+<span id="wdfkit-catalog"></span><h3>wdfkit.catalog<a class="headerlink" href="#module-wdfkit.catalog" title="Link to this heading"></a></h3>
+<p>Directory-level WDF catalog: fast metadata scan without loading spectra.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="wdfkit.catalog.Catalog">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">wdfkit.catalog.</span></span><span class="sig-name descname"><span class="pre">Catalog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">Path</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/wdfkit/catalog.html#Catalog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wdfkit.catalog.Catalog" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Metadata table for a collection of <code class="docutils literal notranslate"><span class="pre">.wdf</span></code> files.</p>
+<p>Build via <a class="reference internal" href="#wdfkit.catalog.catalog" title="wdfkit.catalog.catalog"><code class="xref py py-func docutils literal notranslate"><span class="pre">catalog()</span></code></a> rather than constructing directly.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="wdfkit.catalog.Catalog.df">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">df</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">DataFrame</span></span><a class="headerlink" href="#wdfkit.catalog.Catalog.df" title="Link to this definition"></a></dt>
+<dd><p>The underlying metadata DataFrame (read-only view).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="wdfkit.catalog.Catalog.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#wdfkit.WDFReader" title="wdfkit.WDFReader"><span class="pre">WDFReader</span></a></span></span><a class="reference internal" href="../_modules/wdfkit/catalog.html#Catalog.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wdfkit.catalog.Catalog.load" title="Link to this definition"></a></dt>
+<dd><p>Return a fully-loaded <a class="reference internal" href="#wdfkit.WDFReader" title="wdfkit.WDFReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">WDFReader</span></code></a> for row <em>idx</em>.</p>
+<p><em>idx</em> is 1-based: <code class="docutils literal notranslate"><span class="pre">load(1)</span></code> returns the first file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="wdfkit.catalog.Catalog.summary">
+<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/wdfkit/catalog.html#Catalog.summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wdfkit.catalog.Catalog.summary" title="Link to this definition"></a></dt>
+<dd><p>Return counts and date range grouped by <code class="docutils literal notranslate"><span class="pre">scan_type</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="wdfkit.catalog.Catalog.to_csv">
+<span class="sig-name descname"><span class="pre">to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.14)"><span class="pre">PathLike</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/wdfkit/catalog.html#Catalog.to_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wdfkit.catalog.Catalog.to_csv" title="Link to this definition"></a></dt>
+<dd><p>Write the catalog DataFrame to <em>path</em> as CSV.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wdfkit.catalog.catalog">
+<span class="sig-prename descclassname"><span class="pre">wdfkit.catalog.</span></span><span class="sig-name descname"><span class="pre">catalog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/os.html#os.PathLike" title="(in Python v3.14)"><span class="pre">PathLike</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#wdfkit.catalog.Catalog" title="wdfkit.catalog.Catalog"><span class="pre">Catalog</span></a></span></span><a class="reference internal" href="../_modules/wdfkit/catalog.html#catalog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wdfkit.catalog.catalog" title="Link to this definition"></a></dt>
+<dd><p>Scan <em>directory</em> for <code class="docutils literal notranslate"><span class="pre">.wdf</span></code> files and return a <a class="reference internal" href="#wdfkit.catalog.Catalog" title="wdfkit.catalog.Catalog"><code class="xref py py-class docutils literal notranslate"><span class="pre">Catalog</span></code></a>.</p>
+<p>Uses header-only parsing (no spectra loaded) — fast even for large
+collections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory</strong> – Path to the directory to scan.</p></li>
+<li><p><strong>recursive</strong> – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, walk subdirectories recursively.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../getting-started.html" class="btn btn-neutral float-left" title="Getting started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../release.html" class="btn btn-neutral float-right" title="Release notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Ecole Polytechnique Palaiseau.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
