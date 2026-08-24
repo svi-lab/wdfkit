@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 ##############################################################################
 #
-# (c) 2026 SVI - Saint-Gobain Research Paris.
+# (c) 2026 SVI - Saint-Gobain.
 # All rights reserved.
 #
 # File coded by: Danila Shiryaev.
