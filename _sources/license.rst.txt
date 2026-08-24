@@ -9,7 +9,7 @@ OPEN SOURCE LICENSE AGREEMENT
 =============================
 BSD 3-Clause License
 
-Copyright (c) 2026, SVI - Saint Gobain Innovation Hub Europe.
+Copyright (c) 2026, SVI - Saint-Gobain.
 All Rights Reserved.
 
 Redistribution and use in source and binary forms, with or without
