@@ -1,9 +1,6 @@
 numpy
-matplotlib
+pandas
 xarray
 Pillow
-scikit-learn
-scikit-image
-scipy
 dask
 psutil
