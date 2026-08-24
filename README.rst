@@ -30,12 +30,10 @@
 .. |Tracking| image:: https://img.shields.io/badge/issue_tracking-github-blue
         :target: https://github.com/svi-lab/wdfkit/issues
 
-.. raw:: html
-
-   <div align="center">
-     <img src="https://raw.githubusercontent.com/svi-lab/wdfkit/main/docs/source/img/logo.png"
-          alt="wdfkit logo" width="600px">
-   </div>
+.. image:: https://raw.githubusercontent.com/svi-lab/wdfkit/main/docs/source/img/logo.png
+        :alt: wdfkit logo
+        :width: 600px
+        :align: center
 
 About ``wdfkit``
 ----------------
