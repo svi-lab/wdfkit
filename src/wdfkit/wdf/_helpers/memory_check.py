@@ -32,7 +32,7 @@ def check_memory(ctx: ParseContext) -> None:
       exceeds available RAM; emit ``UserWarning`` if it exceeds 75 % of
       available RAM.
     """
-    expected_bytes = ctx.nspectra * ctx.npoints * 4  # float32
+    expected_bytes = ctx.nspectra * ctx.npoints * ctx.dtype.itemsize
     mem = psutil.virtual_memory()
     free_ram = mem.available
 

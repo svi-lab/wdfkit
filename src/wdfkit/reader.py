@@ -49,6 +49,10 @@ class WDFReader:
     chunks
         Dask lazy reading: ``False`` (default, eager NumPy), ``True``
         (auto-chunk ~128 MB), or ``int`` (target MB per chunk).
+    dtype
+        In-memory dtype of the spectral data: ``"float64"`` (default) or
+        ``"float32"``.  The ``.wdf`` file stores float32 on disk, so
+        ``"float32"`` halves memory use without losing precision.
     """
 
     def __init__(
@@ -59,12 +63,14 @@ class WDFReader:
         time_coord: str | None = "seconds_elapsed",
         spectral_dim: str | None = None,
         chunks: bool | int = False,
+        dtype: str | np.dtype = "float64",
     ) -> None:
         self._path = os.fspath(path)
         self._verbose = verbose
         self._time_coord = time_coord
         self._spectral_dim = spectral_dim
         self._chunks = chunks
+        self._dtype = dtype
 
         self._parsed: ParsedWDF = parse_wdf_to_parsed(
             self._path,
@@ -72,6 +78,7 @@ class WDFReader:
             time_coord=self._time_coord,
             spectral_dim=self._spectral_dim,
             chunks=self._chunks,
+            dtype=self._dtype,
         )
         self.data: xr.DataArray = dispatch(self._parsed)
         self.image = self._parsed.img
@@ -154,7 +161,11 @@ class WDFReader:
 
     @property
     def raw_data(self) -> np.ndarray | None:
-        """Flat spectral array of shape (nspectra, xlist_length), float32."""
+        """Flat spectral array of shape (nspectra, xlist_length).
+
+        Dtype follows the ``dtype`` argument given at construction
+        (default float64).
+        """
         return self._parsed.data
 
     # ------------------------------------------------------------------
@@ -272,6 +283,7 @@ def read(
     time_coord: str | None = "seconds_elapsed",
     spectral_dim: str | None = None,
     chunks: bool | int = False,
+    dtype: str | np.dtype = "float64",
 ) -> xr.DataArray:
     """Read a WiRE ``.wdf`` file and return a :class:`xarray.DataArray`.
 
@@ -286,6 +298,10 @@ def read(
         Override for the spectral-axis dimension name.
     chunks
         Dask chunking: ``False`` (eager), ``True`` (auto), or int (target MB).
+    dtype
+        In-memory dtype of the spectral data: ``"float64"`` (default) or
+        ``"float32"``.  The ``.wdf`` file stores float32 on disk, so
+        ``"float32"`` halves memory use without losing precision.
 
     Returns
     -------
@@ -298,6 +314,7 @@ def read(
         time_coord=time_coord,
         spectral_dim=spectral_dim,
         chunks=chunks,
+        dtype=dtype,
     )
     return dispatch(parsed)
 

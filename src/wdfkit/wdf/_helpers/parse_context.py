@@ -6,6 +6,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import IO, Any, Optional
 
+import numpy as np
+
 from .block_index import BlockInfo
 
 
@@ -34,6 +36,8 @@ class ParseContext:
     origin_set_units: list = field(default_factory=list)
     origin_is_primary: list = field(default_factory=list)
     chunks: bool | int = False  # False = eager; True or int MB = lazy/dask
+    # In-memory dtype for spectral data (on-disk format is always float32)
+    dtype: np.dtype = np.dtype("float64")
     # YLST values (stored for linefocus handler)
     ylst_values: object = None  # np.ndarray or None
     ylst_data_type: str = ""
