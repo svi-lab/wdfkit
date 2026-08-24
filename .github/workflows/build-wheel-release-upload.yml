@@ -28,7 +28,7 @@ jobs:
     with:
       project: wdfkit
       c_extension: false
-      maintainer_github_username: svi-lab
+      maintainer_github_username: dshirya
     secrets:
       PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
       PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
