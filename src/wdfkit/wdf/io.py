@@ -274,12 +274,28 @@ def _run_parsers(
         parse_xlst(ctx)
 
 
+def _normalize_dtype(dtype: str | np.dtype) -> np.dtype:
+    """Validate *dtype* and return it as a :class:`numpy.dtype`.
+
+    Only floating-point dtypes are accepted (the on-disk data is float32;
+    *dtype* controls the in-memory representation).
+    """
+    dt = np.dtype(dtype)
+    if not np.issubdtype(dt, np.floating):
+        raise TypeError(
+            f"dtype must be a floating-point type "
+            f"(e.g. 'float32' or 'float64'), got {dt!r}"
+        )
+    return dt
+
+
 def parse_wdf_to_parsed(
     filename: str | os.PathLike[str],
     verbose: bool = False,
     time_coord: str | None = None,
     spectral_dim: str | None = None,
     chunks: bool | int = False,
+    dtype: str | np.dtype = "float64",
 ) -> ParsedWDF:
     """Parse a WDF file and return a :class:`~wdfkit._parsed.ParsedWDF`.
 
@@ -304,6 +320,7 @@ def parse_wdf_to_parsed(
         filesize=filesize,
         f=file_obj,
         chunks=chunks,
+        dtype=_normalize_dtype(dtype),
     )
     try:
         _run_parsers(ctx, load_data=True)
@@ -351,6 +368,7 @@ def read_wdf_file(
     time_coord: str | None,
     spectral_dim: str | None = None,
     chunks: bool | int = False,
+    dtype: str | np.dtype = "float64",
 ) -> tuple[xr.DataArray, object]:
     """Parse a WiRE WDF file (invoked by
     :class:`~wdfkit.reader.WDFReader`).
@@ -363,6 +381,9 @@ def read_wdf_file(
     chunks
         ``False`` for eager NumPy reading (default); ``True`` or an ``int``
         MB value for lazy Dask-backed reading.
+    dtype
+        In-memory dtype of the spectral data, ``"float64"`` (default) or
+        ``"float32"``.  The on-disk values are always float32.
     """
     from .dispatch import dispatch
 
@@ -372,5 +393,6 @@ def read_wdf_file(
         time_coord=time_coord,
         spectral_dim=spectral_dim,
         chunks=chunks,
+        dtype=dtype,
     )
     return dispatch(parsed), parsed.img

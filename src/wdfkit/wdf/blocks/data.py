@@ -43,6 +43,7 @@ def _read_spectra_rows(
     start_spectrum: int,
     n_spectra: int,
     npoints: int,
+    dtype: np.dtype,
 ) -> np.ndarray:
     """Read a contiguous slice of spectra from the DATA block.
 
@@ -62,17 +63,21 @@ def _read_spectra_rows(
         Number of spectra to read.
     npoints:
         Spectral channels per spectrum.
+    dtype:
+        In-memory dtype of the returned array (on-disk values are
+        always float32).
 
     Returns
     -------
-    ``np.ndarray`` of shape ``(n_spectra, npoints)``, dtype ``float32``.
+    ``np.ndarray`` of shape ``(n_spectra, npoints)``, dtype *dtype*.
     """
     byte_offset = data_offset + start_spectrum * npoints * 4
     n_bytes = n_spectra * npoints * 4
     with open(filename, "rb") as f:
         f.seek(byte_offset)
         raw = f.read(n_bytes)
-    return np.frombuffer(raw, dtype="<f4").reshape(n_spectra, npoints)
+    values = np.frombuffer(raw, dtype="<f4").astype(dtype, copy=False)
+    return values.reshape(n_spectra, npoints)
 
 
 def _compute_chunk_spec(
@@ -127,7 +132,7 @@ def _build_lazy_spectra(
     """Build a lazy ``dask.array`` for the DATA block.
 
     The returned array has shape ``(nspectra, npoints)`` and dtype
-    ``float32``.  Zero-padding for incomplete recordings is applied at
+    ``ctx.dtype``.  Zero-padding for incomplete recordings is applied at
     compute time (the trailing zeros are represented as a zero-filled
     delayed chunk, avoiding any disk read for missing data).
     """
@@ -138,6 +143,7 @@ def _build_lazy_spectra(
     ncollected = ctx.ncollected
     npoints = ctx.npoints
     filename = ctx.filename
+    dtype = ctx.dtype
 
     is_map = ctx.params.get("MeasurementType", "").lower().startswith("map")
     if is_map and "NbSteps" in ctx.map_params:
@@ -167,11 +173,12 @@ def _build_lazy_spectra(
                     start,
                     readable_len,
                     npoints,
+                    dtype,
                 )
                 piece = da.from_delayed(
                     delayed_chunk,
                     shape=(chunk_len, npoints),
-                    dtype=np.float32,
+                    dtype=dtype,
                 )
             else:
                 # Partially recorded: read the recorded part, pad with zeros.
@@ -181,18 +188,19 @@ def _build_lazy_spectra(
                     start,
                     readable_len,
                     npoints,
+                    dtype,
                 )
                 recorded = da.from_delayed(
                     delayed_chunk,
                     shape=(readable_len, npoints),
-                    dtype=np.float32,
+                    dtype=dtype,
                 )
                 pad_len = chunk_len - readable_len
-                zeros = da.zeros((pad_len, npoints), dtype=np.float32)
+                zeros = da.zeros((pad_len, npoints), dtype=dtype)
                 piece = da.concatenate([recorded, zeros], axis=0)
         else:
             # Entirely beyond the recorded range — pure zero padding.
-            piece = da.zeros((chunk_len, npoints), dtype=np.float32)
+            piece = da.zeros((chunk_len, npoints), dtype=dtype)
 
         pieces.append(piece)
 
@@ -213,6 +221,9 @@ def parse_data(ctx: "ParseContext") -> None:
     When ``ctx.chunks`` is ``True`` or a positive integer, a lazy
     ``dask.array`` of the same shape is built instead — no data is read from
     disk until ``.compute()`` is called (or an operation triggers it).
+
+    Either way the array dtype is ``ctx.dtype`` (default float64); the
+    on-disk values are always float32.
     """
     name = "DATA"
     for i in indices_named(ctx.blocks, name):
@@ -237,7 +248,9 @@ def parse_data(ctx: "ParseContext") -> None:
                 )
         else:
             data_points_count = ctx.ncollected * ctx.npoints
-            ctx.spectra = np.zeros((ctx.nspectra, ctx.npoints))
+            ctx.spectra = np.zeros(
+                (ctx.nspectra, ctx.npoints), dtype=ctx.dtype
+            )
             ctx.f.seek(data_offset)
             ctx.spectra[: ctx.ncollected] = read_from_file(
                 ctx.f, "<f", count=data_points_count
