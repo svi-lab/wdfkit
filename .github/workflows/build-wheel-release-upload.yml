@@ -28,7 +28,7 @@ jobs:
     with:
       project: wdfkit
       c_extension: false
-      maintainer_github_username: dshirya
+      maintainer_github_username: shcrela
     secrets:
       PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
       PAT_TOKEN: ${{ secrets.PAT_TOKEN }}

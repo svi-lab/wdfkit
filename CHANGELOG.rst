@@ -10,4 +10,3 @@ Release notes
 **Added:**
 
 * Initial public release of ``wdfkit``.
-
